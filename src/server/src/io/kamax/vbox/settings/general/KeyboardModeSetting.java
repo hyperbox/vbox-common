@@ -20,9 +20,9 @@
 
 package io.kamax.vbox.settings.general;
 
-import org.altherian.hbox.constant.KeyboardMode;
-import org.altherian.hbox.constant.MachineAttribute;
-import org.altherian.setting.StringSetting;
+import io.kamax.hbox.constant.KeyboardMode;
+import io.kamax.hbox.constant.MachineAttribute;
+import io.kamax.setting.StringSetting;
 
 public class KeyboardModeSetting extends StringSetting {
 

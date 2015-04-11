@@ -20,8 +20,8 @@
 
 package io.kamax.vbox.settings.snapshot;
 
-import org.altherian.hbox.constant.SnapshotAttribute;
-import org.altherian.setting.BooleanSetting;
+import io.kamax.hbox.constant.SnapshotAttribute;
+import io.kamax.setting.BooleanSetting;
 
 public class SnapshotHasChildren extends BooleanSetting {
 

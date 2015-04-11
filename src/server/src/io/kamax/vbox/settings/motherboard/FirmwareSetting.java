@@ -20,9 +20,9 @@
 
 package io.kamax.vbox.settings.motherboard;
 
-import org.altherian.hbox.constant.Firmware;
-import org.altherian.hbox.constant.MachineAttribute;
-import org.altherian.setting.StringSetting;
+import io.kamax.hbox.constant.Firmware;
+import io.kamax.hbox.constant.MachineAttribute;
+import io.kamax.setting.StringSetting;
 
 public class FirmwareSetting extends StringSetting {
 

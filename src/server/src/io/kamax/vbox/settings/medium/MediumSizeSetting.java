@@ -20,8 +20,8 @@
 
 package io.kamax.vbox.settings.medium;
 
-import org.altherian.hbox.constant.MediumAttribute;
-import org.altherian.setting.PositiveNumberSetting;
+import io.kamax.hbox.constant.MediumAttribute;
+import io.kamax.setting.PositiveNumberSetting;
 
 public class MediumSizeSetting extends PositiveNumberSetting {
 

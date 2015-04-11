@@ -20,8 +20,8 @@
 
 package io.kamax.vbox.settings.storage;
 
-import org.altherian.hbox.constant.StorageControllerAttribute;
-import org.altherian.setting.PositiveNumberSetting;
+import io.kamax.hbox.constant.StorageControllerAttribute;
+import io.kamax.setting.PositiveNumberSetting;
 
 public final class ControllerMaxDeviceCountSetting extends PositiveNumberSetting {
 

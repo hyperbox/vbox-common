@@ -20,8 +20,8 @@
 
 package io.kamax.vbox.settings.storage;
 
-import org.altherian.hbox.constant.StorageControllerAttribute;
-import org.altherian.setting.StringSetting;
+import io.kamax.hbox.constant.StorageControllerAttribute;
+import io.kamax.setting.StringSetting;
 
 public class ControllerTypeSetting extends StringSetting {
 

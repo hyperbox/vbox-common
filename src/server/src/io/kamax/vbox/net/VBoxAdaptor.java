@@ -20,11 +20,11 @@
 
 package io.kamax.vbox.net;
 
-import org.altherian.hbox.exception.HyperboxException;
-import org.altherian.hbox.hypervisor.net._NetAdaptor;
-import org.altherian.hbox.hypervisor.net._NetMode;
-import org.altherian.hbox.hypervisor.net._NetService;
-import org.altherian.tool.logging.Logger;
+import io.kamax.hbox.exception.HyperboxException;
+import io.kamax.hbox.hypervisor.net._NetAdaptor;
+import io.kamax.hbox.hypervisor.net._NetMode;
+import io.kamax.hbox.hypervisor.net._NetService;
+import io.kamax.tool.logging.Logger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

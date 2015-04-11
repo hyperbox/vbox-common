@@ -20,9 +20,9 @@
 
 package io.kamax.vbox.settings.general;
 
-import org.altherian.hbox.constant.MachineAttribute;
-import org.altherian.hbox.constant.MouseMode;
-import org.altherian.setting.StringSetting;
+import io.kamax.hbox.constant.MachineAttribute;
+import io.kamax.hbox.constant.MouseMode;
+import io.kamax.setting.StringSetting;
 
 public class MouseModeSetting extends StringSetting {
 

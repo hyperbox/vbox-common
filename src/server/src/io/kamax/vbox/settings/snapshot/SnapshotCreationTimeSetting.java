@@ -20,8 +20,8 @@
 
 package io.kamax.vbox.settings.snapshot;
 
-import org.altherian.hbox.constant.SnapshotAttribute;
-import org.altherian.setting.PositiveNumberSetting;
+import io.kamax.hbox.constant.SnapshotAttribute;
+import io.kamax.setting.PositiveNumberSetting;
 import java.util.Date;
 
 public class SnapshotCreationTimeSetting extends PositiveNumberSetting {

@@ -20,10 +20,10 @@
 
 package io.kamax.hboxc.gui.vbox;
 
-import org.altherian.hbox.exception.HyperboxException;
-import org.altherian.hboxc.front.gui.hypervisor._GlobalConfigureView;
-import org.altherian.hboxc.front.gui.hypervisor._HypervisorModel;
-import org.altherian.hboxc.front.gui.hypervisor._NetAdaptorConfigureView;
+import io.kamax.hbox.exception.HyperboxException;
+import io.kamax.hboxc.gui.hypervisor._GlobalConfigureView;
+import io.kamax.hboxc.gui.hypervisor._HypervisorModel;
+import io.kamax.hboxc.gui.hypervisor._NetAdaptorConfigureView;
 import io.kamax.vbox.VBoxNetMode;
 import java.util.Collections;
 import java.util.List;

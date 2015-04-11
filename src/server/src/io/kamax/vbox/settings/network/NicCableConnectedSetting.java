@@ -20,8 +20,8 @@
 
 package io.kamax.vbox.settings.network;
 
-import org.altherian.hbox.constant.NetworkInterfaceAttribute;
-import org.altherian.setting.BooleanSetting;
+import io.kamax.hbox.constant.NetworkInterfaceAttribute;
+import io.kamax.setting.BooleanSetting;
 
 public class NicCableConnectedSetting extends BooleanSetting {
 

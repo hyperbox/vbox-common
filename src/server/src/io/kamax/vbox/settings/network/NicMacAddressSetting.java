@@ -20,8 +20,8 @@
 
 package io.kamax.vbox.settings.network;
 
-import org.altherian.hbox.constant.NetworkInterfaceAttribute;
-import org.altherian.setting.StringSetting;
+import io.kamax.hbox.constant.NetworkInterfaceAttribute;
+import io.kamax.setting.StringSetting;
 
 public class NicMacAddressSetting extends StringSetting {
 

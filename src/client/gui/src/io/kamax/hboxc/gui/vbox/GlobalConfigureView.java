@@ -20,10 +20,10 @@
 
 package io.kamax.hboxc.gui.vbox;
 
-import org.altherian.hbox.comm.in.HypervisorIn;
-import org.altherian.hbox.comm.io.StringSettingIO;
-import org.altherian.hbox.comm.out.hypervisor.HypervisorOut;
-import org.altherian.hboxc.front.gui.hypervisor._GlobalConfigureView;
+import io.kamax.hbox.comm.in.HypervisorIn;
+import io.kamax.hbox.comm.io.StringSettingIO;
+import io.kamax.hbox.comm.out.hypervisor.HypervisorOut;
+import io.kamax.hboxc.gui.hypervisor._GlobalConfigureView;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;

@@ -20,8 +20,8 @@
 
 package io.kamax.vbox.settings.video;
 
-import org.altherian.hbox.constant.MachineAttribute;
-import org.altherian.setting.BooleanSetting;
+import io.kamax.hbox.constant.MachineAttribute;
+import io.kamax.setting.BooleanSetting;
 
 public class Accelerate2dVideoSetting extends BooleanSetting {
 

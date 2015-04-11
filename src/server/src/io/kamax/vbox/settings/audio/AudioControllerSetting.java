@@ -20,9 +20,9 @@
 
 package io.kamax.vbox.settings.audio;
 
-import org.altherian.hbox.constant.AudioController;
-import org.altherian.hbox.constant.MachineAttribute;
-import org.altherian.setting.StringSetting;
+import io.kamax.hbox.constant.AudioController;
+import io.kamax.hbox.constant.MachineAttribute;
+import io.kamax.setting.StringSetting;
 
 public class AudioControllerSetting extends StringSetting {
 
