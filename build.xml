@@ -1,0 +1,167 @@
+﻿<!--
+ * 
+ * Hyperbox - Virtual Infrastructure Manager
+ * Copyright (C) 2015 Maxime Dor
+ * 
+ * http://kamax.io/hbox/
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or 
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *  
+-->
+
+<project name="VirtualBox - Base code" default="dist">
+	
+	<property file="build.properties" />
+	
+	<property name="hbox.base.dir"									value="../hyperbox" />
+	
+	<include file="${hbox.base.dir}/build.xml" as="hbox" />
+
+	<property name="out.dir"										value="out" />
+	<property name="out.build.dir"									value="${out.dir}/build" />
+	<property name="out.build.class.dir"							value="${out.build.dir}/class" />
+	<property name="out.build.jar.dir"								value="${out.build.dir}/jar" />
+	
+	<property name="out.bin.dir"									value="${out.dir}/bin" />
+	
+	<property name="out.dist.dir"									value="${out.dir}/dist" />
+	
+	
+	<target name="clean">
+		<delete dir="${out.dir}" />
+	</target>
+	
+	<target name="configure">
+		<exec executable="git" outputProperty="version">
+			<arg line="describe --always" />
+		</exec>
+		
+		<echoproperties>
+			<propertyset>
+				<propertyref prefix="api." />
+				<propertyref prefix="client." />
+				<propertyref prefix="hbox." />
+				<propertyref prefix="server." />
+				<propertyref prefix="vbox." />
+			</propertyset>
+		</echoproperties>
+	</target>
+	
+	
+	<!-- = Base code ================================================================================ -->
+	
+	<property name="vbox.api.id"									value="core" />
+	<property name="vbox.api.dir"									value="${src.dir}/${vbox.api.id}" />
+	<property name="vbox.api.src.dir"								value="${vbox.api.dir}/${src.dir}" />
+	<property name="vbox.api.lib.dir"								value="${vbox.api.dir}/${lib.dir}" />
+	<property name="vbox.api.classes.dir"							value="${out.build.class.dir}/vbox-${vbox.api.id}" />
+	<property name="vbox.api.jar.dir"								value="${out.build.jar.dir}" />
+	<property name="vbox.api.jar.file"								value="${vbox.api.jar.dir}/vbox-${vbox.api.id}.jar" />
+	
+	<path id="vbox.api.classpath">
+		<pathelement location="${vbox.api.classes.dir}" />
+		<fileset dir="${vbox.api.lib.dir}" includes="**/*.jar" />
+		<pathelement location="${api.jar.file}" />
+		<path refid="api.classpath" />
+	</path>
+	
+	<target name="vbox.api.compile" depends="configure">
+		<mkdir dir="${vbox.api.classes.dir}" />
+		<javac source="1.6" target="1.6" debug="on" debuglevel="lines" includeantruntime="false" srcdir="${vbox.api.src.dir}" destdir="${vbox.api.classes.dir}" classpathref="vbox.api.classpath" />
+		
+		<jar destfile="${vbox.api.jar.file}">
+			<fileset dir="${vbox.api.classes.dir}" />
+		</jar>
+	</target>
+	
+	<!-- ============================================================================================ -->
+	
+	
+	
+	<!-- = Client - Base code ======================================================================= -->
+	
+	<property name="vbox.client.id"									value="client" />
+	<property name="vbox.client.dir"								value="${src.dir}/${vbox.client.id}" />
+	
+	<property name="vbox.client.api.id"								value="${vbox.client.id}-core" />
+	<property name="vbox.client.api.dir"							value="${vbox.client.dir}/core" />
+	<property name="vbox.client.api.src.dir"						value="${vbox.client.api.dir}/${src.dir}" />
+	<property name="vbox.client.api.lib.dir"						value="${vbox.client.api.dir}/${lib.dir}" />
+	<property name="vbox.client.api.classes.dir"					value="${out.build.class.dir}/vbox-${vbox.client.api.id}" />
+	<property name="vbox.client.api.jar.dir"						value="${vbox.api.jar.dir}" />
+	<property name="vbox.client.api.jar.file"						value="${vbox.client.api.jar.dir}/vbox-${vbox.client.api.id}.jar" />
+	
+	<path id="vbox.client.api.classpath">
+		<pathelement location="${vbox.client.api.classes.dir}" />
+		<fileset dir="${vbox.client.api.lib.dir}" includes="**/*.jar" />
+		<path refid="vbox.api.classpath" />
+		<pathelement location="${vbox.client.api.jar.file}" />
+		<path refid="client.api.classpath" />
+	</path>
+	
+	<target name="vbox.client.api.compile" depends="vbox.api.compile">
+		<mkdir dir="${vbox.client.api.classes.dir}" />
+		<javac source="1.6" target="1.6" debug="on" debuglevel="lines" includeantruntime="false" srcdir="${vbox.client.api.src.dir}" destdir="${vbox.client.api.classes.dir}" classpathref="vbox.client.api.classpath" />
+		
+		<jar destfile="${vbox.client.api.jar.file}">
+			<fileset dir="${vbox.client.api.classes.dir}" />
+		</jar>
+	</target>
+	
+	<!-- ============================================================================================ -->
+	
+	
+	
+	<!-- = Client - Base GUI code =================================================================== -->
+	
+	<property name="vbox.client.gui.id"								value="${vbox.client.id}-gui" />
+	<property name="vbox.client.gui.dir"							value="${vbox.client.dir}/gui" />
+	<property name="vbox.client.gui.src.dir"						value="${vbox.client.gui.dir}/${src.dir}" />
+	<property name="vbox.client.gui.lib.dir"						value="${vbox.client.gui.dir}/${lib.dir}" />
+	<property name="vbox.client.gui.classes.dir"					value="${out.build.class.dir}/vbox-${vbox.client.gui.id}" />
+	<property name="vbox.client.gui.jar.dir"						value="${vbox.api.jar.dir}" />
+	<property name="vbox.client.gui.jar.file"						value="${vbox.client.gui.jar.dir}/vbox-${vbox.client.gui.id}.jar" />
+	
+	<path id="vbox.client.gui.classpath">
+		<pathelement location="${vbox.client.gui.classes.dir}" />
+		<fileset dir="${vbox.client.gui.lib.dir}" includes="**/*.jar" />
+		<path refid="vbox.client.api.classpath" />
+		<path refid="client.gui.classpath" />
+	</path>
+	
+	<target name="vbox.client.gui.compile" depends="vbox.client.api.compile">
+		<mkdir dir="${vbox.client.gui.classes.dir}" />
+		<javac source="1.6" target="1.6" debug="on" debuglevel="lines" includeantruntime="false" srcdir="${vbox.client.gui.src.dir}" destdir="${vbox.client.gui.classes.dir}" classpathref="vbox.client.gui.classpath" />
+		
+		<jar destfile="${vbox.client.gui.jar.file}">
+			<fileset dir="${vbox.client.gui.classes.dir}" />
+		</jar>
+	</target>
+	
+	<!-- ============================================================================================ -->
+	
+	
+	
+	<!-- = Server - Base Code ======================================================================= -->
+	
+	<property name="server.hyp.vbox.dir"							value="${server.hyp.dir}/virtualbox" />
+	<property name="server.hyp.vbox.helper.dir"						value="${server.hyp.vbox.dir}/common" />
+	<property name="server.hyp.vbox.helper.src.dir"					value="${server.hyp.vbox.helper.dir}/${src.dir}" />
+	<property name="server.hyp.vbox.helper.class.dir"				value="${out.build.class.dir}/srv-vb-helper" />
+	
+	<!-- ============================================================================================ -->
+	
+	<extension-point name="dist" depends="vbox.api.compile, vbox.client.api.compile, vbox.client.gui.compile" />
+
+</project>
