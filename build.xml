@@ -37,7 +37,6 @@
 	
 	<property name="out.dist.dir"									value="${out.dir}/dist" />
 	
-	
 	<target name="clean">
 		<delete dir="${out.dir}" />
 	</target>
@@ -53,6 +52,7 @@
 				<propertyref prefix="client." />
 				<propertyref prefix="hbox." />
 				<propertyref prefix="server." />
+				<propertyref prefix="tools." />
 				<propertyref prefix="vbox." />
 			</propertyset>
 		</echoproperties>
@@ -72,11 +72,10 @@
 	<path id="vbox.api.classpath">
 		<pathelement location="${vbox.api.classes.dir}" />
 		<fileset dir="${vbox.api.lib.dir}" includes="**/*.jar" />
-		<pathelement location="${api.jar.file}" />
 		<path refid="api.classpath" />
 	</path>
 	
-	<target name="vbox.api.compile" depends="configure">
+	<target name="vbox.api.compile" depends="configure, hbox.api.compile">
 		<mkdir dir="${vbox.api.classes.dir}" />
 		<javac source="1.6" target="1.6" debug="on" debuglevel="lines" includeantruntime="false" srcdir="${vbox.api.src.dir}" destdir="${vbox.api.classes.dir}" classpathref="vbox.api.classpath" />
 		
@@ -110,7 +109,7 @@
 		<path refid="client.api.classpath" />
 	</path>
 	
-	<target name="vbox.client.api.compile" depends="vbox.api.compile">
+	<target name="vbox.client.api.compile" depends="vbox.api.compile, hbox.client.api.compile">
 		<mkdir dir="${vbox.client.api.classes.dir}" />
 		<javac source="1.6" target="1.6" debug="on" debuglevel="lines" includeantruntime="false" srcdir="${vbox.client.api.src.dir}" destdir="${vbox.client.api.classes.dir}" classpathref="vbox.client.api.classpath" />
 		
@@ -140,7 +139,7 @@
 		<path refid="client.gui.classpath" />
 	</path>
 	
-	<target name="vbox.client.gui.compile" depends="vbox.client.api.compile">
+	<target name="vbox.client.gui.compile" depends="vbox.client.api.compile, hbox.client.gui.compile">
 		<mkdir dir="${vbox.client.gui.classes.dir}" />
 		<javac source="1.6" target="1.6" debug="on" debuglevel="lines" includeantruntime="false" srcdir="${vbox.client.gui.src.dir}" destdir="${vbox.client.gui.classes.dir}" classpathref="vbox.client.gui.classpath" />
 		
@@ -155,13 +154,36 @@
 	
 	<!-- = Server - Base Code ======================================================================= -->
 	
-	<property name="server.hyp.vbox.dir"							value="${server.hyp.dir}/virtualbox" />
-	<property name="server.hyp.vbox.helper.dir"						value="${server.hyp.vbox.dir}/common" />
-	<property name="server.hyp.vbox.helper.src.dir"					value="${server.hyp.vbox.helper.dir}/${src.dir}" />
-	<property name="server.hyp.vbox.helper.class.dir"				value="${out.build.class.dir}/srv-vb-helper" />
+	<property name="vbox.server.id"									value="server" />
+	<property name="vbox.server.dir"								value="${src.dir}/${vbox.server.id}" />
+	
+	<property name="vbox.server.api.id"								value="${vbox.server.id}-core" />
+	<property name="vbox.server.api.dir"							value="${vbox.server.dir}/core" />
+	<property name="vbox.server.api.src.dir"						value="${vbox.server.api.dir}/${src.dir}" />
+	<property name="vbox.server.api.lib.dir"						value="${vbox.server.api.dir}/${lib.dir}" />
+	<property name="vbox.server.api.classes.dir"					value="${out.build.class.dir}/vbox-${vbox.server.api.id}" />
+	<property name="vbox.server.api.jar.dir"						value="${vbox.api.jar.dir}" />
+	<property name="vbox.server.api.jar.file"						value="${vbox.server.api.jar.dir}/vbox-${vbox.server.api.id}.jar" />
+	
+	<path id="vbox.server.api.classpath">
+		<pathelement location="${vbox.server.api.classes.dir}" />
+		<fileset dir="${vbox.server.api.lib.dir}" includes="**/*.jar" />
+		<path refid="vbox.api.classpath" />
+		<pathelement location="${vbox.server.api.jar.file}" />
+		<path refid="server.api.classpath" />
+	</path>
+	
+	<target name="vbox.server.api.compile" depends="vbox.api.compile, hbox.server.api.compile">
+		<mkdir dir="${vbox.server.api.classes.dir}" />
+		<javac source="1.6" target="1.6" debug="on" debuglevel="lines" includeantruntime="false" srcdir="${vbox.server.api.src.dir}" destdir="${vbox.server.api.classes.dir}" classpathref="vbox.server.api.classpath" />
+		
+		<jar destfile="${vbox.server.api.jar.file}">
+			<fileset dir="${vbox.server.api.classes.dir}" />
+		</jar>
+	</target>
 	
 	<!-- ============================================================================================ -->
 	
-	<extension-point name="dist" depends="vbox.api.compile, vbox.client.api.compile, vbox.client.gui.compile" />
+	<extension-point name="dist" depends="vbox.api.compile, vbox.client.api.compile, vbox.client.gui.compile, vbox.server.api.compile" />
 
 </project>
