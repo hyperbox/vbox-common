@@ -24,6 +24,8 @@
 	
 	<property file="build.properties" />
 	
+	<property name="vbox.name"												value="vbox" />
+	
 	<property name="hbox.api.base.dir"										value="../api" />
 	<property name="hbox.client.base.dir"									value="../client" />
 	<property name="hbox.server.base.dir"									value="../server" />
@@ -32,18 +34,21 @@
 	<include file="${hbox.client.base.dir}/build.xml" as="hbox.client" />
 	<include file="${hbox.server.base.dir}/build.xml" as="hbox.server" />
 
-	<property name="vbox.base.dir"										value="." />
-	<property name="vbox.out.dir"										value="${vbox.base.dir}/${out.dirname}" />
-	<property name="vbox.out.build.dir"									value="${vbox.out.dir}/build" />
-	<property name="vbox.out.build.class.dir"							value="${vbox.out.build.dir}/class" />
-	<property name="vbox.out.build.jar.dir"								value="${vbox.out.build.dir}/jar" />
+	<property name="vbox.base.dir"											value="." />
+	<condition property="vbox.out.dir" value="${hbox.out.dir}">
+			<isset property="hbox.out.dir" />
+	</condition>
+	<property name="vbox.out.dir"											value="${vbox.base.dir}/${out.dirname}" />
+	<property name="vbox.out.build.dir"										value="${vbox.out.dir}/${build.dirname}" />
+	<property name="vbox.out.build.class.dir"								value="${vbox.out.build.dir}/${class.dirname}" />
+	<property name="vbox.out.build.jar.dir"									value="${vbox.out.build.dir}/${jar.dirname}" />
 	
-	<property name="vbox.out.bin.dir"									value="${vbox.out.dir}/bin" />
+	<property name="vbox.out.bin.dir"										value="${vbox.out.dir}/${bin.dirname}" />
 	
-	<property name="vbox.out.dist.dir"									value="${vbox.out.dir}/dist" />
+	<property name="vbox.out.dist.dir"										value="${vbox.out.dir}/${dist.dirname}" />
 	
 	<target name="clean">
-		<delete dir="${out.dir}" />
+		<delete dir="${vbox.out.dir}" />
 	</target>
 	
 	<target name="configure">
@@ -55,13 +60,13 @@
 	
 	<!-- = Base code ================================================================================ -->
 	
-	<property name="vbox.api.id"									value="core" />
-	<property name="vbox.api.dir"									value="${vbox.base.dir}/${src.dirname}/${vbox.api.id}" />
-	<property name="vbox.api.src.dir"								value="${vbox.api.dir}/${src.dirname}" />
-	<property name="vbox.api.lib.dir"								value="${vbox.api.dir}/${lib.dirname}" />
-	<property name="vbox.api.classes.dir"							value="${vbox.out.build.class.dir}/vbox-${vbox.api.id}" />
-	<property name="vbox.api.jar.dir"								value="${vbox.out.build.jar.dir}" />
-	<property name="vbox.api.jar.file"								value="${vbox.api.jar.dir}/vbox-${vbox.api.id}.jar" />
+	<property name="vbox.api.id"										value="${core.name}" />
+	<property name="vbox.api.dir"										value="${vbox.base.dir}/${src.dirname}/${vbox.api.id}" />
+	<property name="vbox.api.src.dir"									value="${vbox.api.dir}/${src.dirname}" />
+	<property name="vbox.api.lib.dir"									value="${vbox.api.dir}/${lib.dirname}" />
+	<property name="vbox.api.classes.dir"								value="${vbox.out.build.class.dir}/vbox-${vbox.api.id}" />
+	<property name="vbox.api.jar.dir"									value="${vbox.out.build.jar.dir}" />
+	<property name="vbox.api.jar.file"									value="${vbox.api.jar.dir}/vbox-${vbox.api.id}.jar" />
 	
 	<path id="vbox.api.classpath">
 		<pathelement location="${vbox.api.classes.dir}" />
@@ -69,10 +74,13 @@
 		<path refid="hbox.api.classpath" />
 	</path>
 	
-	<target name="vbox.api.compile" depends="configure, hbox.api.compile">
+	<target name="api.compile" depends="configure, hbox.api.compile">
 		<mkdir dir="${vbox.api.classes.dir}" />
 		<javac source="1.6" target="1.6" debug="on" debuglevel="lines" includeantruntime="false" srcdir="${vbox.api.src.dir}" destdir="${vbox.api.classes.dir}" classpathref="vbox.api.classpath" />
-		
+	</target>
+	
+	<target name="api.build" depends="api.compile">
+		<mkdir dir="${vbox.api.jar.dir}" />
 		<jar destfile="${vbox.api.jar.file}">
 			<fileset dir="${vbox.api.classes.dir}" />
 		</jar>
@@ -84,16 +92,16 @@
 	
 	<!-- = Client - Base code ======================================================================= -->
 	
-	<property name="vbox.client.id"									value="client" />
-	<property name="vbox.client.dir"								value="${vbox.base.dir}/${src.dirname}/${vbox.client.id}" />
+	<property name="vbox.client.id"										value="${client.name}" />
+	<property name="vbox.client.dir"									value="${vbox.base.dir}/${src.dirname}/${vbox.client.id}" />
 	
-	<property name="vbox.client.api.id"								value="${vbox.client.id}-core" />
-	<property name="vbox.client.api.dir"							value="${vbox.client.dir}/core" />
-	<property name="vbox.client.api.src.dir"						value="${vbox.client.api.dir}/${src.dirname}" />
-	<property name="vbox.client.api.lib.dir"						value="${vbox.client.api.dir}/${lib.dirname}" />
-	<property name="vbox.client.api.classes.dir"					value="${vbox.out.build.class.dir}/vbox-${vbox.client.api.id}" />
-	<property name="vbox.client.api.jar.dir"						value="${vbox.api.jar.dir}" />
-	<property name="vbox.client.api.jar.file"						value="${vbox.client.api.jar.dir}/vbox-${vbox.client.api.id}.jar" />
+	<property name="vbox.client.api.id"									value="${vbox.client.id}-${core.name}" />
+	<property name="vbox.client.api.dir"								value="${vbox.client.dir}/${core.name}" />
+	<property name="vbox.client.api.src.dir"							value="${vbox.client.api.dir}/${src.dirname}" />
+	<property name="vbox.client.api.lib.dir"							value="${vbox.client.api.dir}/${lib.dirname}" />
+	<property name="vbox.client.api.classes.dir"						value="${vbox.out.build.class.dir}/vbox-${vbox.client.api.id}" />
+	<property name="vbox.client.api.jar.dir"							value="${vbox.api.jar.dir}" />
+	<property name="vbox.client.api.jar.file"							value="${vbox.client.api.jar.dir}/vbox-${vbox.client.api.id}.jar" />
 	
 	<path id="vbox.client.api.classpath">
 		<pathelement location="${vbox.client.api.classes.dir}" />
@@ -103,10 +111,13 @@
 		<path refid="hbox.client.api.classpath" />
 	</path>
 	
-	<target name="vbox.client.api.compile" depends="vbox.api.compile, hbox.client.api.compile">
+	<target name="client.api.compile" depends="api.compile, hbox.client.api.compile">
 		<mkdir dir="${vbox.client.api.classes.dir}" />
 		<javac source="1.6" target="1.6" debug="on" debuglevel="lines" includeantruntime="false" srcdir="${vbox.client.api.src.dir}" destdir="${vbox.client.api.classes.dir}" classpathref="vbox.client.api.classpath" />
-		
+	</target>
+	
+	<target name="client.api.build" depends="client.api.compile">
+		<mkdir dir="${vbox.client.api.jar.dir}" />
 		<jar destfile="${vbox.client.api.jar.file}">
 			<fileset dir="${vbox.client.api.classes.dir}" />
 		</jar>
@@ -118,13 +129,13 @@
 	
 	<!-- = Client - Base GUI code =================================================================== -->
 	
-	<property name="vbox.client.gui.id"								value="${vbox.client.id}-gui" />
-	<property name="vbox.client.gui.dir"							value="${vbox.client.dir}/gui" />
-	<property name="vbox.client.gui.src.dir"						value="${vbox.client.gui.dir}/${src.dirname}" />
-	<property name="vbox.client.gui.lib.dir"						value="${vbox.client.gui.dir}/${lib.dirname}" />
-	<property name="vbox.client.gui.classes.dir"					value="${vbox.out.build.class.dir}/vbox-${vbox.client.gui.id}" />
-	<property name="vbox.client.gui.jar.dir"						value="${vbox.api.jar.dir}" />
-	<property name="vbox.client.gui.jar.file"						value="${vbox.client.gui.jar.dir}/vbox-${vbox.client.gui.id}.jar" />
+	<property name="vbox.client.gui.id"									value="${vbox.client.id}-${gui.name}" />
+	<property name="vbox.client.gui.dir"								value="${vbox.client.dir}/${gui.name}" />
+	<property name="vbox.client.gui.src.dir"							value="${vbox.client.gui.dir}/${src.dirname}" />
+	<property name="vbox.client.gui.lib.dir"							value="${vbox.client.gui.dir}/${lib.dirname}" />
+	<property name="vbox.client.gui.classes.dir"						value="${vbox.out.build.class.dir}/vbox-${vbox.client.gui.id}" />
+	<property name="vbox.client.gui.jar.dir"							value="${vbox.api.jar.dir}" />
+	<property name="vbox.client.gui.jar.file"							value="${vbox.client.gui.jar.dir}/vbox-${vbox.client.gui.id}.jar" />
 	
 	<path id="vbox.client.gui.classpath">
 		<pathelement location="${vbox.client.gui.classes.dir}" />
@@ -133,10 +144,13 @@
 		<path refid="hbox.client.gui.classpath" />
 	</path>
 	
-	<target name="vbox.client.gui.compile" depends="vbox.client.api.compile, hbox.client.gui.compile">
+	<target name="client.gui.compile" depends="client.api.compile, hbox.client.gui.compile">
 		<mkdir dir="${vbox.client.gui.classes.dir}" />
 		<javac source="1.6" target="1.6" debug="on" debuglevel="lines" includeantruntime="false" srcdir="${vbox.client.gui.src.dir}" destdir="${vbox.client.gui.classes.dir}" classpathref="vbox.client.gui.classpath" />
-		
+	</target>
+	
+	<target name="client.gui.build" depends="client.gui.compile">
+		<mkdir dir="${vbox.client.gui.jar.dir}" />
 		<jar destfile="${vbox.client.gui.jar.file}">
 			<fileset dir="${vbox.client.gui.classes.dir}" />
 		</jar>
@@ -148,16 +162,16 @@
 	
 	<!-- = Server - Base Code ======================================================================= -->
 	
-	<property name="vbox.server.id"									value="server" />
-	<property name="vbox.server.dir"								value="${vbox.base.dir}/${src.dirname}/${vbox.server.id}" />
+	<property name="vbox.server.id"										value="${server.name}" />
+	<property name="vbox.server.dir"									value="${vbox.base.dir}/${src.dirname}/${vbox.server.id}" />
 	
-	<property name="vbox.server.api.id"								value="${vbox.server.id}-core" />
-	<property name="vbox.server.api.dir"							value="${vbox.server.dir}/core" />
-	<property name="vbox.server.api.src.dir"						value="${vbox.server.api.dir}/${src.dirname}" />
-	<property name="vbox.server.api.lib.dir"						value="${vbox.server.api.dir}/${lib.dirname}" />
-	<property name="vbox.server.api.classes.dir"					value="${vbox.out.build.class.dir}/vbox-${vbox.server.api.id}" />
-	<property name="vbox.server.api.jar.dir"						value="${vbox.api.jar.dir}" />
-	<property name="vbox.server.api.jar.file"						value="${vbox.server.api.jar.dir}/vbox-${vbox.server.api.id}.jar" />
+	<property name="vbox.server.api.id"									value="${vbox.server.id}-${core.name}" />
+	<property name="vbox.server.api.dir"								value="${vbox.server.dir}/${core.name}" />
+	<property name="vbox.server.api.src.dir"							value="${vbox.server.api.dir}/${src.dirname}" />
+	<property name="vbox.server.api.lib.dir"							value="${vbox.server.api.dir}/${lib.dirname}" />
+	<property name="vbox.server.api.classes.dir"						value="${vbox.out.build.class.dir}/vbox-${vbox.server.api.id}" />
+	<property name="vbox.server.api.jar.dir"							value="${vbox.api.jar.dir}" />
+	<property name="vbox.server.api.jar.file"							value="${vbox.server.api.jar.dir}/vbox-${vbox.server.api.id}.jar" />
 	
 	<path id="vbox.server.api.classpath">
 		<pathelement location="${vbox.server.api.classes.dir}" />
@@ -167,10 +181,13 @@
 		<path refid="hbox.server.api.classpath" />
 	</path>
 	
-	<target name="vbox.server.api.compile" depends="vbox.api.compile, hbox.server.api.compile">
+	<target name="server.api.compile" depends="api.compile, hbox.server.api.compile">
 		<mkdir dir="${vbox.server.api.classes.dir}" />
 		<javac source="1.6" target="1.6" debug="on" debuglevel="lines" includeantruntime="false" srcdir="${vbox.server.api.src.dir}" destdir="${vbox.server.api.classes.dir}" classpathref="vbox.server.api.classpath" />
-		
+	</target>
+	
+	<target name="server.api.build" depends="server.api.compile">
+		<mkdir dir="${vbox.server.api.jar.dir}" />
 		<jar destfile="${vbox.server.api.jar.file}">
 			<fileset dir="${vbox.server.api.classes.dir}" />
 		</jar>
@@ -178,6 +195,12 @@
 	
 	<!-- ============================================================================================ -->
 	
-	<extension-point name="dist" depends="vbox.api.compile, vbox.client.api.compile, vbox.client.gui.compile, vbox.server.api.compile" />
+	<extension-point name="compile" depends="api.compile, client.api.compile, client.gui.compile, server.api.compile" />
+	
+	<extension-point name="build" depends="compile, api.compile, client.api.compile, client.gui.compile, server.api.compile" />
+	
+	<extension-point name="deploy" depends="build" />
+	
+	<extension-point name="dist" depends="deploy" />
 
 </project>
