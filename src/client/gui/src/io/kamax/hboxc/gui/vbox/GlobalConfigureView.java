@@ -28,6 +28,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import net.miginfocom.swing.MigLayout;
 
 public class GlobalConfigureView implements _GlobalConfigureView {
 
@@ -44,6 +45,7 @@ public class GlobalConfigureView implements _GlobalConfigureView {
       machineFolderValue = new JTextField();
       consoleModuleValue = new JTextField();
 
+      panel = new JPanel(new MigLayout("ins 0"));
       panel.add(machineFolderLabel);
       panel.add(machineFolderValue, "growx, pushx, wrap");
       panel.add(consoleModuleLabel);
