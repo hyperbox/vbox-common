@@ -1,1 +1,6 @@
 /out/
+
+src/client/gui/.settings/
+src/core/.settings/
+src/server/core/.settings/
+
