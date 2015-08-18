@@ -20,7 +20,6 @@
 
 package io.kamax.hboxc.gui.vbox;
 
-import net.miginfocom.swing.MigLayout;
 import io.kamax.hbox.comm.in.NetAdaptorIn;
 import io.kamax.hbox.comm.io.NetServiceIO;
 import io.kamax.hbox.comm.io.NetService_DHCP_IP4_IO;
@@ -48,6 +47,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
+import net.miginfocom.swing.MigLayout;
 
 public class NATNetworkNicEditor implements _NetAdaptorConfigureView {
 
