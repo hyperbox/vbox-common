@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public class ControllerNameSetting extends StringSetting {
 
-   public ControllerNameSetting(String name) {
-      super(StorageControllerAttribute.Name, name);
-   }
+    public ControllerNameSetting(String name) {
+        super(StorageControllerAttribute.Name, name);
+    }
 
 }

@@ -25,8 +25,8 @@ import io.kamax.setting.PositiveNumberSetting;
 
 public class CpuCountSetting extends PositiveNumberSetting {
 
-   public CpuCountSetting(long cpuCount) {
-      super(MachineAttribute.CpuCount, cpuCount);
-   }
+    public CpuCountSetting(long cpuCount) {
+        super(MachineAttribute.CpuCount, cpuCount);
+    }
 
 }

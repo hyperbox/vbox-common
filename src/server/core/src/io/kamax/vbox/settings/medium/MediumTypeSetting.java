@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public class MediumTypeSetting extends StringSetting {
 
-   public MediumTypeSetting(String type) {
-      super(MediumAttribute.Type, type);
-   }
+    public MediumTypeSetting(String type) {
+        super(MediumAttribute.Type, type);
+    }
 
 }

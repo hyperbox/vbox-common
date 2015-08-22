@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public class ControllerTypeSetting extends StringSetting {
 
-   public ControllerTypeSetting(String type) {
-      super(StorageControllerAttribute.Type, type);
-   }
+    public ControllerTypeSetting(String type) {
+        super(StorageControllerAttribute.Type, type);
+    }
 
 }

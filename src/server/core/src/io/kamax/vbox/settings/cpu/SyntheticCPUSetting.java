@@ -25,8 +25,8 @@ import io.kamax.setting.BooleanSetting;
 
 public class SyntheticCPUSetting extends BooleanSetting {
 
-   public SyntheticCPUSetting(boolean isEnabled) {
-      super(MachineAttribute.SyntheticCPU, isEnabled);
-   }
+    public SyntheticCPUSetting(boolean isEnabled) {
+        super(MachineAttribute.SyntheticCPU, isEnabled);
+    }
 
 }

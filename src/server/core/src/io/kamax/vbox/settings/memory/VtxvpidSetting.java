@@ -25,8 +25,8 @@ import io.kamax.setting.BooleanSetting;
 
 public class VtxvpidSetting extends BooleanSetting {
 
-   public VtxvpidSetting(boolean isEnabled) {
-      super(MachineAttribute.Vtxvpid, isEnabled);
-   }
+    public VtxvpidSetting(boolean isEnabled) {
+        super(MachineAttribute.Vtxvpid, isEnabled);
+    }
 
 }

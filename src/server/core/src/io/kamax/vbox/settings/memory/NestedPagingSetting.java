@@ -25,8 +25,8 @@ import io.kamax.setting.BooleanSetting;
 
 public class NestedPagingSetting extends BooleanSetting {
 
-   public NestedPagingSetting(boolean isEnabled) {
-      super(MachineAttribute.NestedPaging, isEnabled);
-   }
+    public NestedPagingSetting(boolean isEnabled) {
+        super(MachineAttribute.NestedPaging, isEnabled);
+    }
 
 }

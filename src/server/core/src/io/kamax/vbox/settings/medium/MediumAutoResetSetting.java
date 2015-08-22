@@ -25,8 +25,8 @@ import io.kamax.setting.BooleanSetting;
 
 public class MediumAutoResetSetting extends BooleanSetting {
 
-   public MediumAutoResetSetting(boolean isAutoReset) {
-      super(MediumAttribute.AutoReset, isAutoReset);
-   }
+    public MediumAutoResetSetting(boolean isAutoReset) {
+        super(MediumAttribute.AutoReset, isAutoReset);
+    }
 
 }

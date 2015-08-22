@@ -27,35 +27,35 @@ import java.io.File;
 
 public class VBoxXPCOM {
 
-   private static final String defaultHome = "/usr/lib/virtualbox";
+    private static final String defaultHome = "/usr/lib/virtualbox";
 
-   public static String getDefaultHome() {
-      return defaultHome;
-   }
+    public static String getDefaultHome() {
+        return defaultHome;
+    }
 
-   // https://kamax.io/hbox/kb/xpcomBindingsRessourcesNotReleased.txt
-   public static void triggerVBoxSVC() {
-      triggerVBoxSVC(getDefaultHome());
-   }
+    // https://kamax.io/hbox/kb/xpcomBindingsRessourcesNotReleased.txt
+    public static void triggerVBoxSVC() {
+        triggerVBoxSVC(getDefaultHome());
+    }
 
-   // https://kamax.io/hbox/kb/xpcomBindingsRessourcesNotReleased.txt
-   public static void triggerVBoxSVC(String homeDir) {
-      File libxpcom = new File(homeDir + File.separator + "libvboxjxpcom.so");
-      Logger.debug("Lib exists - " + libxpcom.getAbsolutePath() + " - " + libxpcom.isFile());
-      File vboxmanage = new File(homeDir + File.separator + "VBoxManage").getAbsoluteFile();
-      if (!vboxmanage.exists()) {
-         throw new VBoxManageNotFoundException(vboxmanage);
-      }
+    // https://kamax.io/hbox/kb/xpcomBindingsRessourcesNotReleased.txt
+    public static void triggerVBoxSVC(String homeDir) {
+        File libxpcom = new File(homeDir + File.separator + "libvboxjxpcom.so");
+        Logger.debug("Lib exists - " + libxpcom.getAbsolutePath() + " - " + libxpcom.isFile());
+        File vboxmanage = new File(homeDir + File.separator + "VBoxManage").getAbsoluteFile();
+        if (!vboxmanage.exists()) {
+            throw new VBoxManageNotFoundException(vboxmanage);
+        }
 
-      triggerVBoxSVC(homeDir + File.separator + "VBoxManage", "modifyvm", "\"\"");
-   }
+        triggerVBoxSVC(homeDir + File.separator + "VBoxManage", "modifyvm", "\"\"");
+    }
 
-   // https://kamax.io/hbox/kb/xpcomBindingsRessourcesNotReleased.txt
-   public static void triggerVBoxSVC(String... command) {
-      File trigger = new File(command[0]);
-      Logger.debug("VBoxSVC trigger exec @ " + trigger.getAbsolutePath() + " is file? " + trigger.isFile());
+    // https://kamax.io/hbox/kb/xpcomBindingsRessourcesNotReleased.txt
+    public static void triggerVBoxSVC(String... command) {
+        File trigger = new File(command[0]);
+        Logger.debug("VBoxSVC trigger exec @ " + trigger.getAbsolutePath() + " is file? " + trigger.isFile());
 
-      ProcessRunner.runAndWait(command);
-   }
+        ProcessRunner.runAndWait(command);
+    }
 
 }

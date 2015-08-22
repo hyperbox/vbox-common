@@ -25,8 +25,8 @@ import io.kamax.setting.PositiveNumberSetting;
 
 public class MediumSizeSetting extends PositiveNumberSetting {
 
-   public MediumSizeSetting(long size) {
-      super(MediumAttribute.Size, size);
-   }
+    public MediumSizeSetting(long size) {
+        super(MediumAttribute.Size, size);
+    }
 
 }

@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public class HardwareUuidSetting extends StringSetting {
 
-   public HardwareUuidSetting(String uuid) {
-      super(MachineAttribute.HardwareUuid, uuid);
-   }
+    public HardwareUuidSetting(String uuid) {
+        super(MachineAttribute.HardwareUuid, uuid);
+    }
 
 }

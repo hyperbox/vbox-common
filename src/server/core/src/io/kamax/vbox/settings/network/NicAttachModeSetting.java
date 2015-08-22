@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public class NicAttachModeSetting extends StringSetting {
 
-   public NicAttachModeSetting(String attachMode) {
-      super(NetworkInterfaceAttribute.AttachMode, attachMode);
-   }
+    public NicAttachModeSetting(String attachMode) {
+        super(NetworkInterfaceAttribute.AttachMode, attachMode);
+    }
 
 }

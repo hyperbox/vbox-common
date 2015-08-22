@@ -25,8 +25,8 @@ import io.kamax.setting.BooleanSetting;
 
 public class SnapshotIsOnlineSetting extends BooleanSetting {
 
-   public SnapshotIsOnlineSetting(boolean value) {
-      super(SnapshotAttribute.IsOnline, value);
-   }
+    public SnapshotIsOnlineSetting(boolean value) {
+        super(SnapshotAttribute.IsOnline, value);
+    }
 
 }

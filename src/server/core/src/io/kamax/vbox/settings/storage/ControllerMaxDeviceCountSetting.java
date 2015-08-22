@@ -25,8 +25,8 @@ import io.kamax.setting.PositiveNumberSetting;
 
 public final class ControllerMaxDeviceCountSetting extends PositiveNumberSetting {
 
-   public ControllerMaxDeviceCountSetting(Long maxCount) {
-      super(StorageControllerAttribute.MaxDeviceCount, maxCount);
-   }
+    public ControllerMaxDeviceCountSetting(Long maxCount) {
+        super(StorageControllerAttribute.MaxDeviceCount, maxCount);
+    }
 
 }

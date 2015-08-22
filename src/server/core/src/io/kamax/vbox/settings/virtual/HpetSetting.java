@@ -25,8 +25,8 @@ import io.kamax.setting.BooleanSetting;
 
 public class HpetSetting extends BooleanSetting {
 
-   public HpetSetting(boolean isEnabled) {
-      super(MachineAttribute.HPET, isEnabled);
-   }
+    public HpetSetting(boolean isEnabled) {
+        super(MachineAttribute.HPET, isEnabled);
+    }
 
 }

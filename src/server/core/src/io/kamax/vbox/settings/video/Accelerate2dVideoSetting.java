@@ -25,8 +25,8 @@ import io.kamax.setting.BooleanSetting;
 
 public class Accelerate2dVideoSetting extends BooleanSetting {
 
-   public Accelerate2dVideoSetting(boolean isEnabled) {
-      super(MachineAttribute.Accelerate2dVideo, isEnabled);
-   }
+    public Accelerate2dVideoSetting(boolean isEnabled) {
+        super(MachineAttribute.Accelerate2dVideo, isEnabled);
+    }
 
 }

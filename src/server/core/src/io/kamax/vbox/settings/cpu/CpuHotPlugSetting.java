@@ -25,8 +25,8 @@ import io.kamax.setting.BooleanSetting;
 
 public class CpuHotPlugSetting extends BooleanSetting {
 
-   public CpuHotPlugSetting(boolean isEnabled) {
-      super(MachineAttribute.CpuHotPlug, isEnabled);
-   }
+    public CpuHotPlugSetting(boolean isEnabled) {
+        super(MachineAttribute.CpuHotPlug, isEnabled);
+    }
 
 }

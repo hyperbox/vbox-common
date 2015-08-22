@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public class DescriptionSetting extends StringSetting {
 
-   public DescriptionSetting(String desc) {
-      super(MachineAttribute.Description, desc);
-   }
+    public DescriptionSetting(String desc) {
+        super(MachineAttribute.Description, desc);
+    }
 
 }

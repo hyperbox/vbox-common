@@ -25,8 +25,8 @@ import io.kamax.setting.BooleanSetting;
 
 public class NicEnabledSetting extends BooleanSetting {
 
-   public NicEnabledSetting(boolean isEnabled) {
-      super(NetworkInterfaceAttribute.Enabled, isEnabled);
-   }
+    public NicEnabledSetting(boolean isEnabled) {
+        super(NetworkInterfaceAttribute.Enabled, isEnabled);
+    }
 
 }

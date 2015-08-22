@@ -25,8 +25,8 @@ import io.kamax.setting.PositiveNumberSetting;
 
 public final class MemorySetting extends PositiveNumberSetting {
 
-   public MemorySetting(long value) {
-      super(MachineAttribute.Memory, value);
-   }
+    public MemorySetting(long value) {
+        super(MachineAttribute.Memory, value);
+    }
 
 }

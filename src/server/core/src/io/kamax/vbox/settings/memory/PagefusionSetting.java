@@ -25,8 +25,8 @@ import io.kamax.setting.BooleanSetting;
 
 public final class PagefusionSetting extends BooleanSetting {
 
-   public PagefusionSetting(boolean isEnabled) {
-      super(MachineAttribute.PageFusion, isEnabled);
-   }
+    public PagefusionSetting(boolean isEnabled) {
+        super(MachineAttribute.PageFusion, isEnabled);
+    }
 
 }

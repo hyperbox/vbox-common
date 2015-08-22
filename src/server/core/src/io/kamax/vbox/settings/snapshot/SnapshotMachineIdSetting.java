@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public class SnapshotMachineIdSetting extends StringSetting {
 
-   public SnapshotMachineIdSetting(String id) {
-      super(SnapshotAttribute.MachineID, id);
-   }
+    public SnapshotMachineIdSetting(String id) {
+        super(SnapshotAttribute.MachineID, id);
+    }
 
 }

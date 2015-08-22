@@ -25,8 +25,8 @@ import io.kamax.setting.BooleanSetting;
 
 public final class ControllerIoCacheSetting extends BooleanSetting {
 
-   public ControllerIoCacheSetting(Boolean isEnabled) {
-      super(StorageControllerAttribute.IoCache, isEnabled);
-   }
+    public ControllerIoCacheSetting(Boolean isEnabled) {
+        super(StorageControllerAttribute.IoCache, isEnabled);
+    }
 
 }

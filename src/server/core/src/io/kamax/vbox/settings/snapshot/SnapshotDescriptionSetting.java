@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public class SnapshotDescriptionSetting extends StringSetting {
 
-   public SnapshotDescriptionSetting(String desc) {
-      super(SnapshotAttribute.Description, desc);
-   }
+    public SnapshotDescriptionSetting(String desc) {
+        super(SnapshotAttribute.Description, desc);
+    }
 
 }

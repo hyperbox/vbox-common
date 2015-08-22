@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public class NicPromiscuousModeSetting extends StringSetting {
 
-   public NicPromiscuousModeSetting(String mode) {
-      super(NetworkInterfaceAttribute.PromiscuousMode, mode);
-   }
+    public NicPromiscuousModeSetting(String mode) {
+        super(NetworkInterfaceAttribute.PromiscuousMode, mode);
+    }
 
 }

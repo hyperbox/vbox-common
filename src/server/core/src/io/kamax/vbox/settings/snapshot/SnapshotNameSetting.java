@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public class SnapshotNameSetting extends StringSetting {
 
-   public SnapshotNameSetting(String name) {
-      super(SnapshotAttribute.Name, name);
-   }
+    public SnapshotNameSetting(String name) {
+        super(SnapshotAttribute.Name, name);
+    }
 
 }

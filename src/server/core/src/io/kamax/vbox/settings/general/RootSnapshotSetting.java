@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public class RootSnapshotSetting extends StringSetting {
 
-   public RootSnapshotSetting(String uuid) {
-      super(MachineAttribute.RootSnapshotUuid, uuid);
-   }
+    public RootSnapshotSetting(String uuid) {
+        super(MachineAttribute.RootSnapshotUuid, uuid);
+    }
 
 }

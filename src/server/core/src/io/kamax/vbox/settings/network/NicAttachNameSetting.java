@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public class NicAttachNameSetting extends StringSetting {
 
-   public NicAttachNameSetting(String attachName) {
-      super(NetworkInterfaceAttribute.AttachName, attachName);
-   }
+    public NicAttachNameSetting(String attachName) {
+        super(NetworkInterfaceAttribute.AttachName, attachName);
+    }
 
 }

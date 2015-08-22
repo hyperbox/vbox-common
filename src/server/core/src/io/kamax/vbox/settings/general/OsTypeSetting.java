@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public final class OsTypeSetting extends StringSetting {
 
-   public OsTypeSetting(String s) {
-      super(MachineAttribute.OsType, s);
-   }
+    public OsTypeSetting(String s) {
+        super(MachineAttribute.OsType, s);
+    }
 
 }

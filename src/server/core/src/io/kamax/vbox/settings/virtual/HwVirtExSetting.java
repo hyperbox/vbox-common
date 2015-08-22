@@ -25,8 +25,8 @@ import io.kamax.setting.BooleanSetting;
 
 public class HwVirtExSetting extends BooleanSetting {
 
-   public HwVirtExSetting(boolean isEnabled) {
-      super(MachineAttribute.HwVirtEx, isEnabled);
-   }
+    public HwVirtExSetting(boolean isEnabled) {
+        super(MachineAttribute.HwVirtEx, isEnabled);
+    }
 
 }

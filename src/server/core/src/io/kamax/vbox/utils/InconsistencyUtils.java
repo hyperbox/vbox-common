@@ -22,35 +22,35 @@ package io.kamax.vbox.utils;
 
 /**
  * This class is used to provide workarounds for various bugs or very-desirable features in the Virtualbox API.
- * 
+ *
  * @author max
  */
 public class InconsistencyUtils {
 
-   /**
-    * <p>
-    * Workaround for Bug Ticket <a href="https://www.virtualbox.org/ticket/11316">#11316</a>
-    * </p>
-    * <p>
-    * This will keep any value within {@link Integer#MIN_VALUE} and {@link Integer#MAX_VALUE} by reducing the {@link Long} value if necessary.<br/>
-    * We assume that it is not possible to reach any value outside these boundaries within the methods of the API for anything ID-like.
-    * </p>
-    * 
-    * @param value a Long from within Virtualbox's API
-    * @return a int value.
-    */
-   public static Integer getAndTruncate(long value) {
-      Integer finalInt = 0;
+    /**
+     * <p>
+     * Workaround for Bug Ticket <a href="https://www.virtualbox.org/ticket/11316">#11316</a>
+     * </p>
+     * <p>
+     * This will keep any value within {@link Integer#MIN_VALUE} and {@link Integer#MAX_VALUE} by reducing the {@link Long} value if necessary.<br/>
+     * We assume that it is not possible to reach any value outside these boundaries within the methods of the API for anything ID-like.
+     * </p>
+     * 
+     * @param value a Long from within Virtualbox's API
+     * @return a int value.
+     */
+    public static Integer getAndTruncate(long value) {
+        Integer finalInt = 0;
 
-      if (value < Integer.MIN_VALUE) {
-         finalInt = Integer.MIN_VALUE;
-      } else if (value > Integer.MAX_VALUE) {
-         finalInt = Integer.MAX_VALUE;
-      } else {
-         finalInt = (int) value;
-      }
+        if (value < Integer.MIN_VALUE) {
+            finalInt = Integer.MIN_VALUE;
+        } else if (value > Integer.MAX_VALUE) {
+            finalInt = Integer.MAX_VALUE;
+        } else {
+            finalInt = (int) value;
+        }
 
-      return finalInt;
-   }
+        return finalInt;
+    }
 
 }

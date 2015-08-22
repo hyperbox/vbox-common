@@ -25,8 +25,8 @@ import io.kamax.setting.BooleanSetting;
 
 public class NicCableConnectedSetting extends BooleanSetting {
 
-   public NicCableConnectedSetting(boolean isConnected) {
-      super(NetworkInterfaceAttribute.CableConnected, isConnected);
-   }
+    public NicCableConnectedSetting(boolean isConnected) {
+        super(NetworkInterfaceAttribute.CableConnected, isConnected);
+    }
 
 }

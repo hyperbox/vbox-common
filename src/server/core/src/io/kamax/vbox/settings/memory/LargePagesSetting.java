@@ -25,8 +25,8 @@ import io.kamax.setting.BooleanSetting;
 
 public final class LargePagesSetting extends BooleanSetting {
 
-   public LargePagesSetting(boolean isEnabled) {
-      super(MachineAttribute.LargePages, isEnabled);
-   }
+    public LargePagesSetting(boolean isEnabled) {
+        super(MachineAttribute.LargePages, isEnabled);
+    }
 
 }

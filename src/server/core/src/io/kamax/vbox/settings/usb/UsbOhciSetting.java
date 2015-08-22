@@ -25,12 +25,12 @@ import io.kamax.setting.BooleanSetting;
 
 public class UsbOhciSetting extends BooleanSetting {
 
-   public UsbOhciSetting(boolean isEnabled) {
-      super(MachineAttribute.UsbOhci, isEnabled);
-   }
+    public UsbOhciSetting(boolean isEnabled) {
+        super(MachineAttribute.UsbOhci, isEnabled);
+    }
 
-   public UsbOhciSetting(Long amount) {
-      super(MachineAttribute.UsbOhci, (amount > 0));
-   }
+    public UsbOhciSetting(Long amount) {
+        super(MachineAttribute.UsbOhci, (amount > 0));
+    }
 
 }

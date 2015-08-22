@@ -25,8 +25,8 @@ import io.kamax.setting.BooleanSetting;
 
 public class PaeSetting extends BooleanSetting {
 
-   public PaeSetting(boolean isEnabled) {
-      super(MachineAttribute.PAE, isEnabled);
-   }
+    public PaeSetting(boolean isEnabled) {
+        super(MachineAttribute.PAE, isEnabled);
+    }
 
 }

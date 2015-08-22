@@ -32,43 +32,43 @@ import net.miginfocom.swing.MigLayout;
 
 public class GlobalConfigureView implements _GlobalConfigureView {
 
-   private JLabel machineFolderLabel;
-   private JTextField machineFolderValue;
-   private JLabel consoleModuleLabel;
-   private JTextField consoleModuleValue;
-   private JPanel panel;
+    private JLabel machineFolderLabel;
+    private JTextField machineFolderValue;
+    private JLabel consoleModuleLabel;
+    private JTextField consoleModuleValue;
+    private JPanel panel;
 
-   public GlobalConfigureView() {
-      machineFolderLabel = new JLabel("Default Machine Folder");
-      consoleModuleLabel = new JLabel("Default Extention Pack");
+    public GlobalConfigureView() {
+        machineFolderLabel = new JLabel("Default Machine Folder");
+        consoleModuleLabel = new JLabel("Default Extention Pack");
 
-      machineFolderValue = new JTextField();
-      consoleModuleValue = new JTextField();
+        machineFolderValue = new JTextField();
+        consoleModuleValue = new JTextField();
 
-      panel = new JPanel(new MigLayout("ins 0"));
-      panel.add(machineFolderLabel);
-      panel.add(machineFolderValue, "growx, pushx, wrap");
-      panel.add(consoleModuleLabel);
-      panel.add(consoleModuleValue, "growx, pushx, wrap");
-   }
+        panel = new JPanel(new MigLayout("ins 0"));
+        panel.add(machineFolderLabel);
+        panel.add(machineFolderValue, "growx, pushx, wrap");
+        panel.add(consoleModuleLabel);
+        panel.add(consoleModuleValue, "growx, pushx, wrap");
+    }
 
-   @Override
-   public JComponent getComponent() {
-      return panel;
-   }
+    @Override
+    public JComponent getComponent() {
+        return panel;
+    }
 
-   @Override
-   public void update(HypervisorOut hypOut) {
-      machineFolderValue.setText(hypOut.getSetting("vbox.global.machineFolder").getString());
-      consoleModuleValue.setText(hypOut.getSetting("vbox.global.consoleModule").getString());
-   }
+    @Override
+    public void update(HypervisorOut hypOut) {
+        machineFolderValue.setText(hypOut.getSetting("vbox.global.machineFolder").getString());
+        consoleModuleValue.setText(hypOut.getSetting("vbox.global.consoleModule").getString());
+    }
 
-   @Override
-   public HypervisorIn getUserInput() {
-      HypervisorIn hypIn = new HypervisorIn();
-      hypIn.setSetting(new StringSettingIO("vbox.global.machineFolder", machineFolderValue.getText()));
-      hypIn.setSetting(new StringSettingIO("vbox.global.consoleModule", consoleModuleValue.getText()));
-      return hypIn;
-   }
+    @Override
+    public HypervisorIn getUserInput() {
+        HypervisorIn hypIn = new HypervisorIn();
+        hypIn.setSetting(new StringSettingIO("vbox.global.machineFolder", machineFolderValue.getText()));
+        hypIn.setSetting(new StringSettingIO("vbox.global.consoleModule", consoleModuleValue.getText()));
+        return hypIn;
+    }
 
 }

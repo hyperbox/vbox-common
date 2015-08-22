@@ -26,12 +26,12 @@ import io.kamax.setting.StringSetting;
 
 public class MouseModeSetting extends StringSetting {
 
-   public MouseModeSetting(String mode) {
-      super(MachineAttribute.MouseMode, mode);
-   }
+    public MouseModeSetting(String mode) {
+        super(MachineAttribute.MouseMode, mode);
+    }
 
-   public MouseModeSetting(MouseMode mode) {
-      this(mode.toString());
-   }
+    public MouseModeSetting(MouseMode mode) {
+        this(mode.toString());
+    }
 
 }

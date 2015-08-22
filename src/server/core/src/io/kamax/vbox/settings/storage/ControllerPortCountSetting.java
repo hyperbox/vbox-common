@@ -25,8 +25,8 @@ import io.kamax.setting.PositiveNumberSetting;
 
 public class ControllerPortCountSetting extends PositiveNumberSetting {
 
-   public ControllerPortCountSetting(long portCount) {
-      super(StorageControllerAttribute.PortCount, portCount);
-   }
+    public ControllerPortCountSetting(long portCount) {
+        super(StorageControllerAttribute.PortCount, portCount);
+    }
 
 }

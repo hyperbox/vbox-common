@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public class MediumLocationSetting extends StringSetting {
 
-   public MediumLocationSetting(String path) {
-      super(MediumAttribute.Location, path);
-   }
+    public MediumLocationSetting(String path) {
+        super(MediumAttribute.Location, path);
+    }
 
 }

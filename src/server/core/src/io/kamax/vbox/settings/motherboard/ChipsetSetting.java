@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public class ChipsetSetting extends StringSetting {
 
-   public ChipsetSetting(String s) {
-      super(MachineAttribute.Chipset, s);
-   }
+    public ChipsetSetting(String s) {
+        super(MachineAttribute.Chipset, s);
+    }
 
 }

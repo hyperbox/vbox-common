@@ -25,8 +25,8 @@ import io.kamax.setting.PositiveNumberSetting;
 
 public class CpuExecCapSetting extends PositiveNumberSetting {
 
-   public CpuExecCapSetting(long execCap) {
-      super(MachineAttribute.CpuExecCap, execCap);
-   }
+    public CpuExecCapSetting(long execCap) {
+        super(MachineAttribute.CpuExecCap, execCap);
+    }
 
 }

@@ -25,8 +25,8 @@ import io.kamax.setting.PositiveNumberSetting;
 
 public final class VRamSetting extends PositiveNumberSetting {
 
-   public VRamSetting(long memoryMb) {
-      super(MachineAttribute.VRAM, memoryMb);
-   }
+    public VRamSetting(long memoryMb) {
+        super(MachineAttribute.VRAM, memoryMb);
+    }
 
 }

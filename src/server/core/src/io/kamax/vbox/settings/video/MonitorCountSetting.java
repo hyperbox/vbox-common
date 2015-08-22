@@ -25,8 +25,8 @@ import io.kamax.setting.PositiveNumberSetting;
 
 public class MonitorCountSetting extends PositiveNumberSetting {
 
-   public MonitorCountSetting(long monitorCount) {
-      super(MachineAttribute.MonitorCount, monitorCount);
-   }
+    public MonitorCountSetting(long monitorCount) {
+        super(MachineAttribute.MonitorCount, monitorCount);
+    }
 
 }

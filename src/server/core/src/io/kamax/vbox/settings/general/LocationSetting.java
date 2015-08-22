@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public class LocationSetting extends StringSetting {
 
-   public LocationSetting(String location) {
-      super(MachineAttribute.Location, location);
-   }
+    public LocationSetting(String location) {
+        super(MachineAttribute.Location, location);
+    }
 
 }

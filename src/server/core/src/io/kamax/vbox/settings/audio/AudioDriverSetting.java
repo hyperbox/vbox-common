@@ -26,12 +26,12 @@ import io.kamax.setting.StringSetting;
 
 public class AudioDriverSetting extends StringSetting {
 
-   public AudioDriverSetting(AudioDriver driver) {
-      this(driver.getId());
-   }
+    public AudioDriverSetting(AudioDriver driver) {
+        this(driver.getId());
+    }
 
-   public AudioDriverSetting(String value) {
-      super(MachineAttribute.AudioDriver, value);
-   }
+    public AudioDriverSetting(String value) {
+        super(MachineAttribute.AudioDriver, value);
+    }
 
 }

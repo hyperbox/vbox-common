@@ -26,12 +26,12 @@ import io.kamax.setting.StringSetting;
 
 public class AudioControllerSetting extends StringSetting {
 
-   public AudioControllerSetting(String value) {
-      super(MachineAttribute.AudioController, value);
-   }
+    public AudioControllerSetting(String value) {
+        super(MachineAttribute.AudioController, value);
+    }
 
-   public AudioControllerSetting(AudioController value) {
-      this(value.getId());
-   }
+    public AudioControllerSetting(AudioController value) {
+        this(value.getId());
+    }
 
 }

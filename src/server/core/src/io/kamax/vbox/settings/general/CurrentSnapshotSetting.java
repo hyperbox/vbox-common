@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public class CurrentSnapshotSetting extends StringSetting {
 
-   public CurrentSnapshotSetting(String uuid) {
-      super(MachineAttribute.CurrentSnapshotUuid, uuid);
-   }
+    public CurrentSnapshotSetting(String uuid) {
+        super(MachineAttribute.CurrentSnapshotUuid, uuid);
+    }
 
 }

@@ -25,8 +25,8 @@ import io.kamax.setting.BooleanSetting;
 
 public final class AudioEnabled extends BooleanSetting {
 
-   public AudioEnabled(boolean isEnabled) {
-      super(MachineAttribute.AudioEnable, isEnabled);
-   }
+    public AudioEnabled(boolean isEnabled) {
+        super(MachineAttribute.AudioEnable, isEnabled);
+    }
 
 }

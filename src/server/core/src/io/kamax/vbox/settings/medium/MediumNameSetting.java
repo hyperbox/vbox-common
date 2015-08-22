@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public class MediumNameSetting extends StringSetting {
 
-   public MediumNameSetting(String name) {
-      super(MediumAttribute.Name, name);
-   }
+    public MediumNameSetting(String name) {
+        super(MediumAttribute.Name, name);
+    }
 
 }

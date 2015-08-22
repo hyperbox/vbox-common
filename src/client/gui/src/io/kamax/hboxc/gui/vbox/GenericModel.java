@@ -25,28 +25,29 @@ import io.kamax.hboxc.gui.hypervisor._GlobalConfigureView;
 import io.kamax.hboxc.gui.hypervisor._HypervisorModel;
 import io.kamax.hboxc.gui.hypervisor._NetAdaptorConfigureView;
 import io.kamax.vbox.VBoxNetMode;
-import java.util.Collections;
+import io.kamax.vbox.VirtualBox;
+import java.util.Arrays;
 import java.util.List;
 
 public class GenericModel implements _HypervisorModel {
 
-   @Override
-   public List<String> getSupported() {
-      return Collections.emptyList();
-   }
+    @Override
+    public List<String> getSupported() {
+        return Arrays.asList(VirtualBox.VBOX_ID);
+    }
 
-   @Override
-   public _GlobalConfigureView getConfigureView() {
-      return new GlobalConfigureView();
-   }
+    @Override
+    public _GlobalConfigureView getConfigureView() {
+        return new GlobalConfigureView();
+    }
 
-   @Override
-   public _NetAdaptorConfigureView getNetAdaptorConfig(String srvId, String modeId, String adaptId) {
-      if (VBoxNetMode.HostOnly.is(modeId)) {
-         return new HostOnlyNicEditor(srvId, modeId, adaptId);
-      } else {
-         throw new HyperboxException(modeId + " is not supported in GUI");
-      }
-   }
+    @Override
+    public _NetAdaptorConfigureView getNetAdaptorConfig(String srvId, String modeId, String adaptId) {
+        if (VBoxNetMode.HostOnly.is(modeId)) {
+            return new HostOnlyNicEditor(srvId, modeId, adaptId);
+        } else {
+            throw new HyperboxException(modeId + " is not supported in GUI");
+        }
+    }
 
 }

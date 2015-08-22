@@ -26,12 +26,12 @@ import java.util.UUID;
 
 public class SnapshotUuidSetting extends StringSetting {
 
-   public SnapshotUuidSetting(String uuid) {
-      super(SnapshotAttribute.Uuid, uuid);
-   }
+    public SnapshotUuidSetting(String uuid) {
+        super(SnapshotAttribute.Uuid, uuid);
+    }
 
-   public SnapshotUuidSetting(UUID uuid) {
-      this(uuid.toString());
-   }
+    public SnapshotUuidSetting(UUID uuid) {
+        this(uuid.toString());
+    }
 
 }

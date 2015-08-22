@@ -51,198 +51,198 @@ import net.miginfocom.swing.MigLayout;
 
 public class NATNetworkNicEditor implements _NetAdaptorConfigureView {
 
-   private String srvId;
-   private String modeId;
-   private String adaptId;
+    private String srvId;
+    private String modeId;
+    private String adaptId;
 
-   private JLabel enableLabel;
-   private JCheckBox enableValue;
-   private JLabel nameLabel;
-   private JTextField nameValue;
-   private JLabel cidrLabel;
-   private JTextField cidrValue;
-   private JLabel dhcpEnableLabel;
-   private JCheckBox dhcpEnableValue;
-   private JLabel ip6EnableLabel;
-   private JCheckBox ip6EnableValue;
-   private JLabel ip6GwLabel;
-   private JCheckBox ip6GwValue;
-   private JButton natButton;
-   private JPanel panel;
+    private JLabel enableLabel;
+    private JCheckBox enableValue;
+    private JLabel nameLabel;
+    private JTextField nameValue;
+    private JLabel cidrLabel;
+    private JTextField cidrValue;
+    private JLabel dhcpEnableLabel;
+    private JCheckBox dhcpEnableValue;
+    private JLabel ip6EnableLabel;
+    private JCheckBox ip6EnableValue;
+    private JLabel ip6GwLabel;
+    private JCheckBox ip6GwValue;
+    private JButton natButton;
+    private JPanel panel;
 
-   private List<NetService_NAT_IO> rules;
+    private List<NetService_NAT_IO> rules;
 
-   public NATNetworkNicEditor(final String srvId, final String modeId, final String adaptId) {
-      this.srvId = srvId;
-      this.modeId = modeId;
-      this.adaptId = adaptId;
+    public NATNetworkNicEditor(final String srvId, final String modeId, final String adaptId) {
+        this.srvId = srvId;
+        this.modeId = modeId;
+        this.adaptId = adaptId;
 
-      nameLabel = new JLabel("Network Name:");
-      nameValue = new JTextField(16);
+        nameLabel = new JLabel("Network Name:");
+        nameValue = new JTextField(16);
 
-      panel = new JPanel(new MigLayout("ins 0"));
-      if (adaptId != null) {
-         enableLabel = new JLabel("Enable Network:");
-         enableValue = new JCheckBox();
-         cidrLabel = new JLabel("Network CIDR:");
-         cidrValue = new JTextField(16);
-         dhcpEnableLabel = new JLabel("Supports DHCP");
-         dhcpEnableValue = new JCheckBox();
-         ip6EnableLabel = new JLabel("Supports IPv6");
-         ip6EnableValue = new JCheckBox();
-         ip6GwLabel = new JLabel("Advertise default IPv6 Route");
-         ip6GwValue = new JCheckBox();
-         natButton = new JButton("Port Forwarding");
-         natButton.addActionListener(new ActionListener() {
+        panel = new JPanel(new MigLayout("ins 0"));
+        if (adaptId != null) {
+            enableLabel = new JLabel("Enable Network:");
+            enableValue = new JCheckBox();
+            cidrLabel = new JLabel("Network CIDR:");
+            cidrValue = new JTextField(16);
+            dhcpEnableLabel = new JLabel("Supports DHCP");
+            dhcpEnableValue = new JCheckBox();
+            ip6EnableLabel = new JLabel("Supports IPv6");
+            ip6EnableValue = new JCheckBox();
+            ip6GwLabel = new JLabel("Advertise default IPv6 Route");
+            ip6GwValue = new JCheckBox();
+            natButton = new JButton("Port Forwarding");
+            natButton.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               rules = NATNetworkNATRulesDialog.getInput(srvId, modeId, adaptId);
-               Logger.debug("Were rules given? " + (rules != null));
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    rules = NATNetworkNATRulesDialog.getInput(srvId, modeId, adaptId);
+                    Logger.debug("Were rules given? " + (rules != null));
+                }
+
+            });
+
+            panel.add(enableLabel);
+            panel.add(enableValue, "growx,pushx,wrap");
+            panel.add(nameLabel);
+            panel.add(nameValue, "growx,pushx,wrap");
+            panel.add(cidrLabel);
+            panel.add(cidrValue, "growx,pushx,wrap");
+            panel.add(dhcpEnableLabel);
+            panel.add(dhcpEnableValue, "growx,pushx,wrap");
+            panel.add(ip6EnableLabel);
+            panel.add(ip6EnableValue, "growx,pushx,wrap");
+            panel.add(ip6GwLabel);
+            panel.add(ip6GwValue, "growx,pushx,wrap");
+            panel.add(natButton, "center,span");
+
+            JCheckBoxUtils.link(enableValue, nameValue, cidrValue, dhcpEnableValue, ip6EnableValue, ip6GwValue, natButton);
+            JCheckBoxUtils.link(ip6EnableValue, ip6GwValue);
+        } else {
+            panel.add(nameLabel);
+            panel.add(nameValue, "growx,pushx,wrap");
+        }
+    }
+
+    @Override
+    public JComponent getComponent() {
+        return panel;
+    }
+
+    @Override
+    public void update(NetAdaptorOut nicOut) {
+        enableValue.setSelected(false);
+        if (nicOut.isEnabled()) {
+            enableValue.doClick();
+            nameValue.setText(nicOut.getLabel());
+
+            new SwingWorker<NetService_IP4_CIDR_IO, Void>() {
+
+                @Override
+                protected NetService_IP4_CIDR_IO doInBackground() throws Exception {
+                    return (NetService_IP4_CIDR_IO) Gui.getServer(srvId).getHypervisor().getNetService(modeId, adaptId, NetServiceType.IPv4_NetCIDR.getId());
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        NetService_IP4_CIDR_IO svc = get();
+                        cidrValue.setText(svc.getCIDR());
+                    } catch (InterruptedException e) {
+                        Gui.showError("Operation was canceled");
+                    } catch (ExecutionException e) {
+                        Gui.showError(e.getCause());
+                    }
+                }
+
+            }.execute();
+
+            new SwingWorker<NetService_DHCP_IP4_IO, Void>() {
+
+                @Override
+                protected NetService_DHCP_IP4_IO doInBackground() throws Exception {
+                    return (NetService_DHCP_IP4_IO) Gui.getServer(srvId).getHypervisor().getNetService(modeId, adaptId, NetServiceType.DHCP_IPv4.getId());
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        NetService_DHCP_IP4_IO svc = get();
+                        dhcpEnableValue.setSelected(svc.isEnabled());
+                    } catch (InterruptedException e) {
+                        Gui.showError("Operation was canceled");
+                    } catch (ExecutionException e) {
+                        Gui.showError(e.getCause());
+                    }
+                }
+
+            }.execute();
+
+            new SwingWorker<NetService_IP6_IO, Void>() {
+
+                @Override
+                protected NetService_IP6_IO doInBackground() throws Exception {
+                    return (NetService_IP6_IO) Gui.getServer(srvId).getHypervisor().getNetService(modeId, adaptId, NetServiceType.IPv6.getId());
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        NetService_IP6_IO svc = get();
+                        ip6EnableValue.setSelected(svc.isEnabled());
+                    } catch (InterruptedException e) {
+                        Gui.showError("Operation was canceled");
+                    } catch (ExecutionException e) {
+                        Gui.showError(e.getCause());
+                    }
+                }
+
+            }.execute();
+
+            new SwingWorker<NetService_IP6_Gateway_IO, Void>() {
+
+                @Override
+                protected NetService_IP6_Gateway_IO doInBackground() throws Exception {
+                    return (NetService_IP6_Gateway_IO) Gui.getServer(srvId).getHypervisor().getNetService(modeId, adaptId, NetServiceType.IPv6_Gateway.getId());
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        NetService_IP6_Gateway_IO svc = get();
+                        ip6GwValue.setSelected(svc.isEnabled());
+                    } catch (InterruptedException e) {
+                        Gui.showError("Operation was canceled");
+                    } catch (ExecutionException e) {
+                        Gui.showError(e.getCause());
+                    }
+                }
+
+            }.execute();
+
+        }
+    }
+
+    @Override
+    public NetAdaptorIn getInput() {
+        if (AxStrings.isEmpty(nameValue.getText())) {
+            throw new InputValidationException("Name cannot be empty");
+        }
+        NetAdaptorIn naIn = new NetAdaptorIn(modeId, adaptId);
+        naIn.setLabel(nameValue.getText());
+        if (adaptId != null) {
+            naIn.setService(new NetService_IP4_CIDR_IO(cidrValue.getText()));
+            naIn.setService(new NetService_DHCP_IP4_IO(dhcpEnableValue.isSelected()));
+            naIn.setService(new NetService_IP6_IO(ip6EnableValue.isSelected()));
+            naIn.setService(new NetService_IP6_Gateway_IO(ip6GwValue.isSelected()));
+            if (rules != null) {
+                for (NetServiceIO io : rules) {
+                    naIn.setService(io);
+                }
             }
-
-         });
-
-         panel.add(enableLabel);
-         panel.add(enableValue, "growx,pushx,wrap");
-         panel.add(nameLabel);
-         panel.add(nameValue, "growx,pushx,wrap");
-         panel.add(cidrLabel);
-         panel.add(cidrValue, "growx,pushx,wrap");
-         panel.add(dhcpEnableLabel);
-         panel.add(dhcpEnableValue, "growx,pushx,wrap");
-         panel.add(ip6EnableLabel);
-         panel.add(ip6EnableValue, "growx,pushx,wrap");
-         panel.add(ip6GwLabel);
-         panel.add(ip6GwValue, "growx,pushx,wrap");
-         panel.add(natButton, "center,span");
-
-         JCheckBoxUtils.link(enableValue, nameValue, cidrValue, dhcpEnableValue, ip6EnableValue, ip6GwValue, natButton);
-         JCheckBoxUtils.link(ip6EnableValue, ip6GwValue);
-      } else {
-         panel.add(nameLabel);
-         panel.add(nameValue, "growx,pushx,wrap");
-      }
-   }
-
-   @Override
-   public JComponent getComponent() {
-      return panel;
-   }
-
-   @Override
-   public void update(NetAdaptorOut nicOut) {
-      enableValue.setSelected(false);
-      if (nicOut.isEnabled()) {
-         enableValue.doClick();
-         nameValue.setText(nicOut.getLabel());
-
-         new SwingWorker<NetService_IP4_CIDR_IO, Void>() {
-
-            @Override
-            protected NetService_IP4_CIDR_IO doInBackground() throws Exception {
-               return (NetService_IP4_CIDR_IO) Gui.getServer(srvId).getHypervisor().getNetService(modeId, adaptId, NetServiceType.IPv4_NetCIDR.getId());
-            }
-
-            @Override
-            protected void done() {
-               try {
-                  NetService_IP4_CIDR_IO svc = get();
-                  cidrValue.setText(svc.getCIDR());
-               } catch (InterruptedException e) {
-                  Gui.showError("Operation was canceled");
-               } catch (ExecutionException e) {
-                  Gui.showError(e.getCause());
-               }
-            }
-
-         }.execute();
-
-         new SwingWorker<NetService_DHCP_IP4_IO, Void>() {
-
-            @Override
-            protected NetService_DHCP_IP4_IO doInBackground() throws Exception {
-               return (NetService_DHCP_IP4_IO) Gui.getServer(srvId).getHypervisor().getNetService(modeId, adaptId, NetServiceType.DHCP_IPv4.getId());
-            }
-
-            @Override
-            protected void done() {
-               try {
-                  NetService_DHCP_IP4_IO svc = get();
-                  dhcpEnableValue.setSelected(svc.isEnabled());
-               } catch (InterruptedException e) {
-                  Gui.showError("Operation was canceled");
-               } catch (ExecutionException e) {
-                  Gui.showError(e.getCause());
-               }
-            }
-
-         }.execute();
-
-         new SwingWorker<NetService_IP6_IO, Void>() {
-
-            @Override
-            protected NetService_IP6_IO doInBackground() throws Exception {
-               return (NetService_IP6_IO) Gui.getServer(srvId).getHypervisor().getNetService(modeId, adaptId, NetServiceType.IPv6.getId());
-            }
-
-            @Override
-            protected void done() {
-               try {
-                  NetService_IP6_IO svc = get();
-                  ip6EnableValue.setSelected(svc.isEnabled());
-               } catch (InterruptedException e) {
-                  Gui.showError("Operation was canceled");
-               } catch (ExecutionException e) {
-                  Gui.showError(e.getCause());
-               }
-            }
-
-         }.execute();
-
-         new SwingWorker<NetService_IP6_Gateway_IO, Void>() {
-
-            @Override
-            protected NetService_IP6_Gateway_IO doInBackground() throws Exception {
-               return (NetService_IP6_Gateway_IO) Gui.getServer(srvId).getHypervisor().getNetService(modeId, adaptId, NetServiceType.IPv6_Gateway.getId());
-            }
-
-            @Override
-            protected void done() {
-               try {
-                  NetService_IP6_Gateway_IO svc = get();
-                  ip6GwValue.setSelected(svc.isEnabled());
-               } catch (InterruptedException e) {
-                  Gui.showError("Operation was canceled");
-               } catch (ExecutionException e) {
-                  Gui.showError(e.getCause());
-               }
-            }
-
-         }.execute();
-
-      }
-   }
-
-   @Override
-   public NetAdaptorIn getInput() {
-      if (AxStrings.isEmpty(nameValue.getText())) {
-         throw new InputValidationException("Name cannot be empty");
-      }
-      NetAdaptorIn naIn = new NetAdaptorIn(modeId, adaptId);
-      naIn.setLabel(nameValue.getText());
-      if (adaptId != null) {
-         naIn.setService(new NetService_IP4_CIDR_IO(cidrValue.getText()));
-         naIn.setService(new NetService_DHCP_IP4_IO(dhcpEnableValue.isSelected()));
-         naIn.setService(new NetService_IP6_IO(ip6EnableValue.isSelected()));
-         naIn.setService(new NetService_IP6_Gateway_IO(ip6GwValue.isSelected()));
-         if (rules != null) {
-            for (NetServiceIO io : rules) {
-               naIn.setService(io);
-            }
-         }
-      }
-      return naIn;
-   }
+        }
+        return naIn;
+    }
 
 }

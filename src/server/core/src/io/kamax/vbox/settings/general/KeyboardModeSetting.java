@@ -26,12 +26,12 @@ import io.kamax.setting.StringSetting;
 
 public class KeyboardModeSetting extends StringSetting {
 
-   public KeyboardModeSetting(String mode) {
-      super(MachineAttribute.KeyboardMode, mode);
-   }
+    public KeyboardModeSetting(String mode) {
+        super(MachineAttribute.KeyboardMode, mode);
+    }
 
-   public KeyboardModeSetting(KeyboardMode mode) {
-      this(mode.toString());
-   }
+    public KeyboardModeSetting(KeyboardMode mode) {
+        this(mode.toString());
+    }
 
 }

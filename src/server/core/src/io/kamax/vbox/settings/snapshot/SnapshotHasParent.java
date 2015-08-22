@@ -25,8 +25,8 @@ import io.kamax.setting.BooleanSetting;
 
 public class SnapshotHasParent extends BooleanSetting {
 
-   public SnapshotHasParent(Boolean hasParent) {
-      super(SnapshotAttribute.HasParent, hasParent);
-   }
+    public SnapshotHasParent(Boolean hasParent) {
+        super(SnapshotAttribute.HasParent, hasParent);
+    }
 
 }

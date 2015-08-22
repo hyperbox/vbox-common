@@ -26,12 +26,12 @@ import io.kamax.setting.StringSetting;
 
 public class FirmwareSetting extends StringSetting {
 
-   public FirmwareSetting(String firmware) {
-      super(MachineAttribute.Firmware, firmware);
-   }
+    public FirmwareSetting(String firmware) {
+        super(MachineAttribute.Firmware, firmware);
+    }
 
-   public FirmwareSetting(Firmware firmware) {
-      this(firmware.toString());
-   }
+    public FirmwareSetting(Firmware firmware) {
+        this(firmware.toString());
+    }
 
 }

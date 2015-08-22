@@ -25,8 +25,8 @@ import io.kamax.setting.BooleanSetting;
 
 public class ACPISetting extends BooleanSetting {
 
-   public ACPISetting(boolean isEnabled) {
-      super(MachineAttribute.ACPI, isEnabled);
-   }
+    public ACPISetting(boolean isEnabled) {
+        super(MachineAttribute.ACPI, isEnabled);
+    }
 
 }

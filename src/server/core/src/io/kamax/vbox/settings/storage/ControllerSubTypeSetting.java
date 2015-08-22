@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public class ControllerSubTypeSetting extends StringSetting {
 
-   public ControllerSubTypeSetting(String subType) {
-      super(StorageControllerAttribute.SubType, subType);
-   }
+    public ControllerSubTypeSetting(String subType) {
+        super(StorageControllerAttribute.SubType, subType);
+    }
 
 }

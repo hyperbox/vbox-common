@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public class NicAdapterTypeSetting extends StringSetting {
 
-   public NicAdapterTypeSetting(String adapterType) {
-      super(NetworkInterfaceAttribute.AdapterType, adapterType);
-   }
+    public NicAdapterTypeSetting(String adapterType) {
+        super(NetworkInterfaceAttribute.AdapterType, adapterType);
+    }
 
 }

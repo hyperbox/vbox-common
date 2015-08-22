@@ -25,8 +25,8 @@ import io.kamax.setting.BooleanSetting;
 
 public class IoAPICSetting extends BooleanSetting {
 
-   public IoAPICSetting(boolean isEnabled) {
-      super(MachineAttribute.IoAPIC, isEnabled);
-   }
+    public IoAPICSetting(boolean isEnabled) {
+        super(MachineAttribute.IoAPIC, isEnabled);
+    }
 
 }

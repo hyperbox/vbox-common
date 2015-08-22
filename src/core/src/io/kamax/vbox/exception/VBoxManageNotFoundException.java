@@ -23,24 +23,26 @@ package io.kamax.vbox.exception;
 import io.kamax.hbox.exception.HypervisorException;
 import java.io.File;
 
-@SuppressWarnings("serial")
+
 public class VBoxManageNotFoundException extends HypervisorException {
 
-   public VBoxManageNotFoundException(File location) {
-      super("VBoxManage was not found at " + location.getAbsolutePath());
-   }
+    private static final long serialVersionUID = -7040863236530382741L;
 
-   public VBoxManageNotFoundException(String s) {
-      super(s);
-   }
+    public VBoxManageNotFoundException(File location) {
+        super("VBoxManage was not found at " + location.getAbsolutePath());
+    }
 
-   public VBoxManageNotFoundException(Throwable t) {
-      super(t);
-      ;
-   }
+    public VBoxManageNotFoundException(String s) {
+        super(s);
+    }
 
-   public VBoxManageNotFoundException(String s, Throwable t) {
-      super(s, t);
-   }
+    public VBoxManageNotFoundException(Throwable t) {
+        super(t);
+        ;
+    }
+
+    public VBoxManageNotFoundException(String s, Throwable t) {
+        super(s, t);
+    }
 
 }

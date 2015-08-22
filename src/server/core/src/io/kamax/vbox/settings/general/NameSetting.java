@@ -25,8 +25,8 @@ import io.kamax.setting.StringSetting;
 
 public final class NameSetting extends StringSetting {
 
-   public NameSetting(String value) {
-      super(MachineAttribute.Name, value);
-   }
+    public NameSetting(String value) {
+        super(MachineAttribute.Name, value);
+    }
 
 }
