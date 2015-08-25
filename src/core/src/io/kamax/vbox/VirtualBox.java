@@ -90,9 +90,6 @@ public final class VirtualBox {
         
         public static final List<String> ALL = Collections.unmodifiableList(new ArrayList<String>() {
 
-            /**
-             *
-             */
             private static final long serialVersionUID = -5601205639117721970L;
 
             {
