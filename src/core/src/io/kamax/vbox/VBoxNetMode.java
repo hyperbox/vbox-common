@@ -28,6 +28,8 @@ import java.util.Set;
 
 public enum VBoxNetMode implements _NetMode {
 
+    Null(false, false, false, false, false),
+
     Bridged(true, false, false, false, false),
 
     Generic(false, true, false, false, false),
