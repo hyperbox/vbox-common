@@ -45,9 +45,12 @@ public class GenericModel implements _HypervisorModel {
     public _NetAdaptorConfigureView getNetAdaptorConfig(String srvId, String modeId, String adaptId) {
         if (VBoxNetMode.HostOnly.is(modeId)) {
             return new HostOnlyNicEditor(srvId, modeId, adaptId);
+        } else if (VBoxNetMode.NATNetwork.is(modeId)) {
+            return new NATNetworkNicEditor(srvId, modeId, adaptId);
         } else {
             throw new HyperboxException(modeId + " is not supported in GUI");
         }
+
     }
 
 }
