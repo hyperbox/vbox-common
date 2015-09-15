@@ -20,6 +20,7 @@
 
 package io.kamax.vbox;
 
+import io.kamax.hbox.exception.HypervisorException;
 import io.kamax.tool.ProcessRunner;
 import io.kamax.tool.logging.Logger;
 import io.kamax.vbox.exception.VBoxManageNotFoundException;
@@ -56,6 +57,19 @@ public class VBoxXPCOM {
         Logger.debug("VBoxSVC trigger exec @ " + trigger.getAbsolutePath() + " is file? " + trigger.isFile());
 
         ProcessRunner.runAndWait(command);
+    }
+
+    public static void validate(String version, long revision) {
+        if (version.contains("OSE") && revision < 50393) {
+            throw new HypervisorException(
+                    "XPCOM is only available on OSE from revision 50393 or greater. Your version is " + version + " r" + revision
+                    + " - See https://www.virtualbox.org/ticket/11232 for more information.");
+        }
+        if (revision < 92456) {
+            throw new HypervisorException(
+                    "XPCOM is only available from revision 92456 or greater. Your version is " + version + " r" + revision
+                    + " - See https://www.virtualbox.org/ticket/11232 for more information.");
+        }
     }
 
 }
