@@ -61,7 +61,7 @@ public class VBoxWebSrv implements _VBoxWebSrv {
             Logger.warning("VBox WebSrv Server is already running, ignoring call to start again");
         }
 
-        Logger.info("VBox WebSrv Server Start: Start");
+        Logger.debug("VBox WebSrv Server Start: Start");
         try {
             if (port == 0) {
                 this.port = NetUtil.getRandomAvailablePort(host, port, 100);
@@ -89,11 +89,18 @@ public class VBoxWebSrv implements _VBoxWebSrv {
 
             processExec = new ProcessExecutor().command(args);
             processRun = processExec.start();
-            Logger.info("Server successfully started");
+            for (int i = 0; i < 50 && isRunning() && NetUtil.isPortAvailable(host, port); i++) {
+                try {
+                    Thread.sleep(100L);
+                } catch (InterruptedException e) {
+                    throw new HyperboxException("Interupted while waiting for WebServices to listen on port " + port, e);
+                }
+            }
+            Logger.info("VirtualBox Web Services server started");
         } catch (IOException e) {
             throw new HyperboxException(e);
         } finally {
-            Logger.info("VBox WebSrv Server Start: End");
+            Logger.debug("VBox WebSrv Server Start: End");
         }
     }
 
@@ -107,32 +114,36 @@ public class VBoxWebSrv implements _VBoxWebSrv {
 
         Logger.debug("VBox WebServices Server shutdown: Start");
         try {
-            Logger.info("Stopping VirtualBox WebServices Process");
+            Logger.info("Stopping VBox WS Process");
             try {
                 process.destroy();
+
+                if (isRunning()) {
+                    int j = 5;
+                    for (int i = 1; i <= j && isRunning(); i++) {
+                        Logger.info("Waiting for VBox WebServices process to stop (" + i + "/" + j + ")");
+                        try {
+                            processRun.getFuture().get(200L, TimeUnit.MILLISECONDS);
+                        } catch (InterruptedException e) {
+                            Logger.warning("Interrupted while waiting for VBox WS process");
+                        } catch (ExecutionException e) {
+                            Logger.warning("Error while waiting for VBox WS process to end", e);
+                        } catch (TimeoutException e) {
+                            // as expected
+                        }
+                    }
+                }
+
+                Logger.info("Is VBox WS process stopped? " + !isRunning());
+                Logger.info("VBox WS return code: " + process.exitValue());
+                Logger.info("Stopped VBox WS process");
             } catch (Throwable t) {
                 if (isRunning()) {
                     processExec.destroyOnExit();
-                    Logger.warning("Unable to stop VirtualBox WebService Process, marked to destroy on exit", t);
+                    Logger.warning("Unable to stop VBox WS process, marked to destroy on exit", t);
                 } else {
-                    Logger.warning("VirtualBox WebService Process stop was not clean", t);
+                    Logger.warning("VBox WS process stop was not clean", t);
                 }
-            } finally {
-                int j = 5;
-                for (int i = 1; i <= j && isRunning(); i++) {
-                    Logger.info("Waiting for VBox WebServices process to stop (" + i + "/" + j + ")");
-                    try {
-                        processRun.getFuture().get(200L, TimeUnit.MILLISECONDS);
-                    } catch (InterruptedException e) {
-                        Logger.warning("Interrupted while waiting for the WebServices process");
-                    } catch (ExecutionException e) {
-                        Logger.warning("Error while waiting for WebServices process to end", e);
-                    } catch (TimeoutException e) {
-                        // as expected
-                    }
-                }
-                Logger.info("Is VirtualBox WebService Process stopped? " + !isRunning());
-                Logger.info("WebServices return code: " + process.exitValue());
             }
         } finally {
             Logger.debug("VBox WebServices Server shutdown: End");
@@ -158,6 +169,8 @@ public class VBoxWebSrv implements _VBoxWebSrv {
         if (!isRunning()) {
             throw new IllegalStateException("VBox Web Server is not running");
         }
+
+        processRun.getProcess().destroy();
     }
 
     @Override
