@@ -28,6 +28,7 @@ import io.kamax.vbox.VBoxNetMode;
 import io.kamax.vbox.VirtualBox;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.ListCellRenderer;
 
 public class GenericModel implements _HypervisorModel {
 
@@ -51,6 +52,11 @@ public class GenericModel implements _HypervisorModel {
             throw new HyperboxException(modeId + " is not supported in GUI");
         }
 
+    }
+
+    @Override
+    public ListCellRenderer getTypeRenderer(ListCellRenderer parent) {
+        return new HypervisorTypeRenderer(parent);
     }
 
 }
