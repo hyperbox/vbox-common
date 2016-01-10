@@ -76,7 +76,7 @@
 	
 	<target name="api.compile" depends="configure">
 		<mkdir dir="${vbox.api.classes.dir}" />
-		<javac source="1.6" target="1.6" debug="on" debuglevel="lines" includeantruntime="false" srcdir="${vbox.api.src.dir}" destdir="${vbox.api.classes.dir}" classpathref="vbox.api.classpath" />
+		<javac source="1.7" target="1.7" debug="on" debuglevel="lines" includeantruntime="false" srcdir="${vbox.api.src.dir}" destdir="${vbox.api.classes.dir}" classpathref="vbox.api.classpath" />
 	</target>
 	
 	<target name="api.build" depends="api.compile">
@@ -113,7 +113,7 @@
 	
 	<target name="client.api.compile" depends="api.compile">
 		<mkdir dir="${vbox.client.api.classes.dir}" />
-		<javac source="1.6" target="1.6" debug="on" debuglevel="lines" includeantruntime="false" srcdir="${vbox.client.api.src.dir}" destdir="${vbox.client.api.classes.dir}" classpathref="vbox.client.api.classpath" />
+		<javac source="1.7" target="1.7" debug="on" debuglevel="lines" includeantruntime="false" srcdir="${vbox.client.api.src.dir}" destdir="${vbox.client.api.classes.dir}" classpathref="vbox.client.api.classpath" />
 	</target>
 	
 	<target name="client.api.build" depends="client.api.compile">
@@ -146,7 +146,7 @@
 	
 	<target name="client.gui.compile" depends="client.api.compile">
 		<mkdir dir="${vbox.client.gui.classes.dir}" />
-		<javac source="1.6" target="1.6" debug="on" debuglevel="lines" includeantruntime="false" srcdir="${vbox.client.gui.src.dir}" destdir="${vbox.client.gui.classes.dir}" classpathref="vbox.client.gui.classpath" />
+		<javac source="1.7" target="1.7" debug="on" debuglevel="lines" includeantruntime="false" srcdir="${vbox.client.gui.src.dir}" destdir="${vbox.client.gui.classes.dir}" classpathref="vbox.client.gui.classpath" />
 	</target>
 	
 	<target name="client.gui.build" depends="client.gui.compile">
@@ -183,7 +183,7 @@
 	
 	<target name="server.api.compile" depends="api.compile">
 		<mkdir dir="${vbox.server.api.classes.dir}" />
-		<javac source="1.6" target="1.6" debug="on" debuglevel="lines" includeantruntime="false" srcdir="${vbox.server.api.src.dir}" destdir="${vbox.server.api.classes.dir}" classpathref="vbox.server.api.classpath" />
+		<javac source="1.7" target="1.7" debug="on" debuglevel="lines" includeantruntime="false" srcdir="${vbox.server.api.src.dir}" destdir="${vbox.server.api.classes.dir}" classpathref="vbox.server.api.classpath" />
 	</target>
 	
 	<target name="server.api.build" depends="server.api.compile">
