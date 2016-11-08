@@ -60,6 +60,10 @@ public class VBoxXPCOM {
     }
 
     public static void validate(String version, long revision) {
+        if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+            throw new HypervisorException("XPCOM is not available on Windows - Use the WebServices connector");
+        }
+
         if (version.contains("OSE")) {
             if (revision < 50393) {
                 throw new HypervisorException(
