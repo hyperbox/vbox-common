@@ -64,14 +64,14 @@ public class VBoxXPCOM {
             if (revision < 50393) {
                 throw new HypervisorException(
                         "XPCOM is only available on OSE from revision 50393 or greater. Your version is " + version + " r" + revision
-                                + " - See https://www.virtualbox.org/ticket/11232 for more information.");
+                        + " - See https://www.virtualbox.org/ticket/11232 for more information.");
             }
         }
         else {
             if (revision < 92456) {
                 throw new HypervisorException(
                         "XPCOM is only available from revision 92456 or greater. Your version is " + version + " r" + revision
-                                + " - See https://www.virtualbox.org/ticket/11232 for more information.");
+                        + " - See https://www.virtualbox.org/ticket/11232 for more information.");
             }
 
         }
