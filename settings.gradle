@@ -1,0 +1,6 @@
+rootProject.name = 'hbox-vbox-common'
+
+include 'modules/api', 'modules/client', 'modules/server'
+project(':modules/api').name = 'hbox-vbox-common-api'
+project(':modules/client').name = 'hbox-vbox-common-client'
+project(':modules/server').name = 'hbox-vbox-common-server'
