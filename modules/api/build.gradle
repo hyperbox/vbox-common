@@ -12,5 +12,5 @@ repositories {
 }
 
 dependencies {
-    compile 'io.kamax:hbox-api:latest'
+    compileOnly 'io.kamax:hbox-api:latest'
 }

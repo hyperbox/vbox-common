@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    compile 'io.kamax:hbox-api:latest'
-    compile 'io.kamax:hbox-client-gui:latest'
+    compileOnly 'io.kamax:hbox-api:latest'
+    compileOnly 'io.kamax:hbox-client-gui:latest'
     compile 'io.kamax:hbox-vbox-common-api:latest'
 }
