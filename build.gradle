@@ -1,3 +1,6 @@
-apply plugin: 'base'
+plugins {
+    id 'base'
+    id 'com.palantir.git-version' version '0.8.0'
+}
 
 evaluationDependsOnChildren()
