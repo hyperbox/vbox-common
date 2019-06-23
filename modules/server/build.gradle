@@ -29,8 +29,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'io.kamax:hbox-api:0.0.14-2-ga95be4c'
-    compileOnly 'io.kamax:hbox-server-api:0.0.13-2-gcf752f2'
+    compileOnly 'io.kamax:hbox-api:0.0.15'
+    compileOnly 'io.kamax:hbox-server-api:0.0.15'
     compile project(':hbox-vbox-common-api')
 
     deployerJars 'org.apache.maven.wagon:wagon-ssh:3.3.3'
