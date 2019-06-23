@@ -1,6 +1,15 @@
 apply plugin: 'java'
 apply plugin: 'maven'
-apply plugin: 'com.palantir.git-version'
+apply plugin: 'idea'
+
+String gitVersion() {
+    ByteArrayOutputStream out = new ByteArrayOutputStream()
+    exec {
+        commandLine = [ 'git', 'describe', '--always', '--dirty' ]
+        standardOutput = out
+    }
+    return out.toString().replace(System.lineSeparator(), '')
+}
 
 group = 'io.kamax'
 version = gitVersion()
@@ -13,7 +22,8 @@ configurations {
 }
 
 repositories {
-    maven { url "https://kamax.io/maven/releases" }
+    maven { url "https://maven.kamax.io/releases/" }
+    maven { url "https://maven.kamax.io/snapshots/" }
     mavenLocal()
     mavenCentral()
 }
@@ -23,7 +33,7 @@ dependencies {
     compileOnly 'io.kamax:hbox-client-gui:0.0.14'
     compile project(':hbox-vbox-common-api')
 
-    deployerJars "org.apache.maven.wagon:wagon-ssh:2.2"
+    deployerJars 'org.apache.maven.wagon:wagon-ssh:3.3.3'
 }
 
 uploadArchives {
