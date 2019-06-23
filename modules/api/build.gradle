@@ -1,11 +1,13 @@
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'idea'
 apply plugin: 'com.palantir.git-version'
 
 group = 'io.kamax'
 version = gitVersion()
 
 sourceCompatibility = 1.7
+targetCompatibility = 1.8
 
 configurations {
     deployerJars
