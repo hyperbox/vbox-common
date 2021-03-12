@@ -40,6 +40,7 @@ public final class VirtualBox {
         public static final String v5_1 = "5.1";
         public static final String v5_2 = "5.2";
         public static final String v6_0 = "6.0";
+        public static final String v6_1 = "6.1";
 
     }
 
@@ -76,6 +77,10 @@ public final class VirtualBox {
         public static final String XPCOM_6_0 = VBOX_ID + "-" + Version.v6_0 + "-" + Type.XPCOM;
         public static final String MSCOM_6_0 = VBOX_ID + "-" + Version.v6_0 + "-" + Type.MSCOM;
         public static final String WS_6_0 = VBOX_ID + "-" + Version.v6_0 + "-" + Type.WEB_SERVICES;
+
+        public static final String XPCOM_6_1 = VBOX_ID + "-" + Version.v6_1 + "-" + Type.XPCOM;
+        public static final String MSCOM_6_1 = VBOX_ID + "-" + Version.v6_1 + "-" + Type.MSCOM;
+        public static final String WS_6_1 = VBOX_ID + "-" + Version.v6_1 + "-" + Type.WEB_SERVICES;
 
     }
 
@@ -123,6 +128,13 @@ public final class VirtualBox {
                         ID.WS_6_0
                 ));
 
+        public static final List<String> ALL_6_1 = Collections.unmodifiableList(
+                Arrays.asList(
+                        ID.XPCOM_6_1,
+                        ID.MSCOM_6_1,
+                        ID.WS_6_1
+                ));
+
 
         public static final List<String> ALL = Collections.unmodifiableList(new ArrayList<String>() {
 
@@ -135,6 +147,7 @@ public final class VirtualBox {
                 addAll(ALL_5_1);
                 addAll(ALL_5_2);
                 addAll(ALL_6_0);
+                addAll(ALL_6_1);
             }
 
         });
