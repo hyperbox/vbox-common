@@ -20,9 +20,6 @@
 
 package io.kamax.vbox;
 
-import io.kamax.tools.platform.PlatformUtil;
-
-
 public class VBoxPlatformUtil {
 
     public static String getInstallPathWin() {
@@ -33,10 +30,6 @@ public class VBoxPlatformUtil {
         } else {
             return "C:\\Program Files\\Oracle\\VirtualBox";
         }
-    }
-
-    public static String getWebSrvCmd() {
-        return PlatformUtil.getString("/usr/lib/virtualbox/vboxwebsrv", getInstallPathWin() + "/VBoxWebSrv.exe", "/usr/local/bin/vboxwebsrv");
     }
 
 }

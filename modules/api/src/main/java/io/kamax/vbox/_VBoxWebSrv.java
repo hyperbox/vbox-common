@@ -23,6 +23,13 @@ package io.kamax.vbox;
 
 public interface _VBoxWebSrv {
 
+    enum State {
+        Starting,
+        Started,
+        Stopping,
+        Stopped
+    }
+
     public void start();
 
     public boolean isRunning();
@@ -32,6 +39,8 @@ public interface _VBoxWebSrv {
     public void kill();
 
     public int getExitCode();
+
+    State getState();
 
     public int getPort();
 

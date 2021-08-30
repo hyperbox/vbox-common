@@ -14,7 +14,7 @@ String gitVersion() {
 group = 'io.kamax'
 version = gitVersion()
 
-sourceCompatibility = 1.7
+sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 configurations {
@@ -32,6 +32,11 @@ dependencies {
     compileOnly 'io.kamax:hbox-api:0.0.15'
     compileOnly 'io.kamax:hbox-server-api:0.0.15'
     compile project(':hbox-vbox-common-api')
+
+    testCompile 'io.kamax:hbox-api:0.0.15'
+    testCompile 'io.kamax:hbox-server-api:0.0.15'
+    testCompile 'junit:junit:4.13.2'
+    testCompile 'org.slf4j:slf4j-simple:1.7.32'
 
     deployerJars 'org.apache.maven.wagon:wagon-ssh:3.3.3'
 }
